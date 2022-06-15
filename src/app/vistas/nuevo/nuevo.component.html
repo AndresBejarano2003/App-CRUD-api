@@ -1,0 +1,69 @@
+<app-header></app-header>
+    <div class="container">
+
+        <h1>CREAR EMPLEADO</h1>
+        <hr>
+<!--(ngSubmit)="checkId(id.value)"-->
+        <form [formGroup]="crearForm" (ngSubmit)="postForm(crearForm.value,id.value)" (click)="resetActivar()">
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1">id</label>
+                <input #id type="text" class="form-control" placeholder="id del empleado" formControlName="id">
+                <div *ngIf="crearForm.controls['id'].dirty">
+                        <label *ngIf="crearForm.controls['id'].hasError('required')">*Campo requerido</label>
+                        <label *ngIf="crearForm.controls['id'].hasError('pattern')">*Solo ingrese numeros en este campo</label>
+                </div>
+            </div>            
+            <div class="form-group">
+                <label for="exampleFormControlInput2">Nombre</label>
+                <input type="text" class="form-control" placeholder="Nombre del empleado" formControlName="nombre">
+                <div *ngIf="crearForm.controls['nombre'].dirty">
+                    <label *ngIf="crearForm.controls['nombre'].hasError('required')">*Campo requerido</label>
+                    <label *ngIf="crearForm.controls['nombre'].hasError('pattern')">*Solo ingrese letras en este campo sin caracteres especiales</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput3">Apellido</label>
+                <input type="text" class="form-control" placeholder="Apellido del empleado" formControlName="apellido">
+                <div *ngIf="crearForm.controls['apellido'].dirty">
+                    <label *ngIf="crearForm.controls['apellido'].hasError('required')">*Campo requerido</label>
+                    <label *ngIf="crearForm.controls['apellido'].hasError('pattern')">*Solo ingrese letras en este campo sin caracteres especiales</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput4">Cedula</label>
+                <input type="text" class="form-control" placeholder="Cedula del empleado" formControlName="cedula">
+                <div *ngIf="crearForm.controls['cedula'].dirty">
+                    <label *ngIf="crearForm.controls['cedula'].hasError('required')">&nbsp;*Campo requerido*</label>
+                    <label *ngIf="crearForm.controls['cedula'].hasError('pattern')">&nbsp;*Solo ingrese numeros en este campo*</label>
+                    <label *ngIf="crearForm.controls['cedula'].hasError('minlength')">&nbsp;*6 caracteres minimo*</label>
+                    <label *ngIf="crearForm.controls['cedula'].hasError('maxlength')">&nbsp;*10 caracteres maximo*</label>
+                </div>
+            </div>
+            <div>
+                <label for="exampleFormControlInput5">Sexo</label><br>
+                <select formControlName="sexo">
+                    <option value="No registrado"> Seleccione</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+            </div>      
+            <div class="form-group">
+                <label for="exampleFormControlInput6">Fecha de nacimiento</label>
+                <input type="date" class="form-control" placeholder="Fecha de nacimiento" formControlName="fechaNacimiento">
+                <div *ngIf="crearForm.controls['fechaNacimiento'].dirty">
+                    <label *ngIf="crearForm.controls['fechaNacimiento'].hasError('required')">*Campo requerido</label>
+                </div>
+            </div><br>   
+            <button type="submit"  style="border-radius: 20px;"  class="btn btn-primary" [disabled]="crearForm.invalid">Guardar</button>
+            <button type="button" class="btn btn-primary" (click)="dashboard()" style="background-color: mediumseagreen; border-color: mediumseagreen; float: inline-end; border-radius: 20px;">Volver</button>             
+        </form><br>  
+        <div *ngIf="activarSuccess==true">
+            <app-mensaje-success [mensaje]="mensaje"></app-mensaje-success>
+        </div>
+         <div *ngIf="activarDanger==true">
+            <app-mensaje-danger [mensaje]="mensaje"></app-mensaje-danger>
+        </div> 
+            
+    </div>    
+<app-footer></app-footer>
