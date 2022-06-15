@@ -9,6 +9,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MensajeDangerComponent } from './plantillas/mensaje-danger/mensaje-danger.component';
 import { MensajeSuccessComponent } from './plantillas/mensaje-success/mensaje-success.component';
+import { EdadPipe } from './pipes/edad.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MensajeSuccessComponent } from './plantillas/mensaje-success/mensaje-su
     FooterComponent,
     routingComponents,
     MensajeDangerComponent,
-    MensajeSuccessComponent
+    MensajeSuccessComponent,
+    EdadPipe
   ],
   imports: [
     BrowserModule,

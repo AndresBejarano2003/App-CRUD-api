@@ -21,7 +21,7 @@ export class EditarComponent implements OnInit {
   datosEmpleado!:  EmpleadoI;
 
   datosForm = new FormGroup({
-    fechaNacimiento: new FormControl("", Validators.required),
+    fechaNacimiento: new FormControl("",Validators.required),
     id:new FormControl("", Validators.compose([Validators.required,Validators.pattern(/^[0-9]+$/)])),
     nombre:new FormControl("", Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]+$/)])),
     apellido:new FormControl("", Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]+$/)])),
@@ -29,9 +29,9 @@ export class EditarComponent implements OnInit {
     sexo:new FormControl("No registrado", {nonNullable:true})
   });
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   let idEmployee = this.activeroute.snapshot.paramMap.get('id');
-  console.log(idEmployee);
+  console.log("Codigo del empleado seleccionado: " + idEmployee);
   this.api.getOneEmployee(idEmployee).subscribe(data => {
     this.datosEmpleado = data;
     this.datosForm.setValue({
@@ -49,6 +49,7 @@ export class EditarComponent implements OnInit {
   putEmployees(form:any){
     this.api.putEmployees(form).subscribe(data =>{
       console.log(data)
+      console.log(data.fechaNacimiento);
       this.mensaje = "Se han actualizado los datos"
       this.activarDanger=false;
       this.activarSuccess=true;
