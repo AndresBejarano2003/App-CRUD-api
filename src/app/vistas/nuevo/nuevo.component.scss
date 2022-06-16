@@ -1,6 +1,7 @@
-/*.mensajes{
-    background-color:transparent;
-    width: 100%;
-    height: 43px;
-    text-align: center;
-}*/
+.mensajeError{
+    color:red;
+}
+.cambioColor{
+box-shadow: 1px 1px 4px 4px rgba(255, 0, 0, 0.486);
+border-color: red;
+}

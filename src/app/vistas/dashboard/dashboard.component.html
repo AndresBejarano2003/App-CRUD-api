@@ -1,10 +1,38 @@
 <app-header></app-header>
 <div class="container">
-    <h3 color="dark">Menú principal</h3><br>
-    <button type="button" style="border-radius: 20px;" class="btn btn-primary" (click)="nuevoEmpleado()">Nuevo empleado</button><br><br>
-    <button type="button" style="border-radius: 20px; background-color:orange; border-color: orange;" class="btn btn-primary" (click)="login()" >Cerrar sesión</button><br>
-</div><br>
-
+    <div style="width: 250px; float: left;">
+        <h3 color="dark">Menú principal</h3><br>
+        <button type="button" class="btn btn-primary" (click)="nuevoEmpleado()">Nuevo empleado</button><br><br>
+    </div>
+    <div style="float: left;">
+        <div><b> SELECCIONE EL COLOR DEL BOTÓN</b></div><br>
+        <select [(ngModel)]="opcion">
+            <option >--Seleccione--</option>
+            <option value="greenyellow">Verde</option>
+            <option value="grey">Gris</option>
+            <option value="deepskyblue">Azul</option>
+            <option value="red">Rojo</option>
+        </select><br><br>
+        <div [ngSwitch]="opcion">
+            <div *ngSwitchDefault>
+                <button type="button" style="border-radius: 20px; background-color:orange; border-color: orange;" class="btn btn-primary" (click)="login()" >Cerrar sesión</button>
+            </div>
+            <div *ngSwitchCase="'greenyellow'">
+                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}" class="btn btn-primary" (click)="login()" >Cerrar sesión</button>
+            </div>
+            <div *ngSwitchCase="'grey'">
+                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}" class="btn btn-primary" (click)="login()" >Cerrar sesión</button>
+            </div>
+            <div *ngSwitchCase="'deepskyblue'">
+                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}" class="btn btn-primary" (click)="login()" >Cerrar sesión</button>
+            </div>
+            <div *ngSwitchCase="'red'">
+                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}" class="btn btn-primary" (click)="login()" >Cerrar sesión</button>
+            </div>
+        </div><br><br>
+    </div>
+</div>
+<div>
     <div class="container">
         <table id="tabla1" class="table table-hover" style="border-bottom-color: gainsboro;">
             <thead>
@@ -36,4 +64,5 @@
             </tbody>
         </table>
     </div>
+</div>    
 <app-footer></app-footer>

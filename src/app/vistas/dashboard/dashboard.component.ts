@@ -11,6 +11,7 @@ import { ListaEmpleadosI } from '../../modelos/listaEmpleados.interface';
 export class DashboardComponent implements OnInit {
 
   empleados: ListaEmpleadosI[] = [];
+  opcion!:string;
 
   constructor(private api:ApiService, private router:Router) { }
 
