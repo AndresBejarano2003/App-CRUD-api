@@ -38,7 +38,7 @@ export class NuevoComponent implements OnInit {
     nombre:new FormControl("", Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]+$/)])),
     apellido:new FormControl("", Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]+$/)])),
     cedula:new FormControl("", Validators.compose([Validators.required, Validators.minLength(6),Validators.maxLength(10),Validators.pattern(/^[0-9]+$/)])),
-    sexo:new FormControl("No registrado", {nonNullable:true}),
+    sexo:new FormControl(),
     fechaNacimiento: new FormControl("", Validators.required)
   });
 

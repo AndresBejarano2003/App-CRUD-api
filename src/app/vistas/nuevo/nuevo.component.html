@@ -1,5 +1,6 @@
 <app-header></app-header>
     <div class="container">
+        <div style="height: 515px;">
 
         <h1>CREAR EMPLEADO</h1>
         <hr>
@@ -43,7 +44,7 @@
             <div>
                 <label for="exampleFormControlInput5">Sexo</label><br>
                 <select formControlName="sexo" [(ngModel)]="sexo">
-                    <option value="No registrado"> Seleccione</option>
+                    <option> Seleccione</option>
                     <option value="M">Masculino</option>
                     <option value="F">Femenino</option>
                 </select>
@@ -85,13 +86,14 @@
                     <hr>
                 </div>                      
             </div>            
-        </div>
-        <div *ngIf="activarSuccess==true">
-            <app-mensaje-success [mensaje]="mensaje"></app-mensaje-success>
-        </div>
-         <div *ngIf="activarDanger==true">
-            <app-mensaje-danger [mensaje]="mensaje"></app-mensaje-danger>
-        </div> 
-            
-    </div>    
+        </div>  
+    </div>   
+    <div *ngIf="activarSuccess==true">
+        <app-mensaje-success [mensaje]="mensaje"></app-mensaje-success>
+    </div>
+     <div *ngIf="activarDanger==true">
+        <app-mensaje-danger [mensaje]="mensaje"></app-mensaje-danger>
+    </div>   
+    </div> <br>   
+    
 <app-footer></app-footer>
