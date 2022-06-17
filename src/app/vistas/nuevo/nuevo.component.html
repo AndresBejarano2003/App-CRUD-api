@@ -44,7 +44,7 @@
             <div>
                 <label for="exampleFormControlInput5">Sexo</label><br>
                 <select formControlName="sexo" [(ngModel)]="sexo">
-                    <option> Seleccione</option>
+                    <option value=""> Seleccione</option>
                     <option value="M">Masculino</option>
                     <option value="F">Femenino</option>
                 </select>
@@ -65,23 +65,23 @@
                     DATOS REGISTRADOS ACTUALMENTE
                     <hr>
                 </b>
-                <div *ngIf="codigoId == undefined && nombre == undefined && apellido == undefined && cedula == undefined && sexo == undefined && fechaNacimiento == undefined"><b>No se ha registrado ningun dato</b></div>
-                <div *ngIf="codigoId != undefined" >
+                <div *ngIf="crearForm.controls['id'].hasError('required') && crearForm.controls['nombre'].hasError('required') && crearForm.controls['apellido'].hasError('required') && crearForm.controls['cedula'].hasError('required') && sexo == undefined && crearForm.controls['fechaNacimiento'].hasError('required')"><b>No se ha registrado ningun dato</b></div>
+                <div *ngIf="!crearForm.controls['id'].hasError('required')" >
                     <b>Id:</b>&nbsp;&nbsp;{{codigoId}}<br>
                 </div>
-                <div *ngIf="nombre != undefined">
+                <div *ngIf="!crearForm.controls['nombre'].hasError('required')">
                     <b>Nombre:</b>&nbsp;&nbsp;{{nombre}}<br>
                 </div>
-                <div *ngIf="apellido != undefined">
+                <div *ngIf="!crearForm.controls['apellido'].hasError('required')">
                     <b>Apellido:</b>&nbsp;&nbsp;{{apellido}}<br>
                 </div>
-                <div *ngIf="cedula != undefined">
+                <div *ngIf="!crearForm.controls['cedula'].hasError('required')">
                     <b>Cedula: </b>&nbsp;&nbsp;{{cedula}}<br>
                 </div>
                 <div *ngIf="sexo != undefined">
                     <b>Sexo:</b>&nbsp;&nbsp;{{sexo}}<br>
                 </div>
-                <div *ngIf="fechaNacimiento != undefined">
+                <div *ngIf="!crearForm.controls['fechaNacimiento'].hasError('required')">
                     <b>Fecha de nacimiento:</b>&nbsp;&nbsp;{{fechaNacimiento}}
                     <hr>
                 </div>                      
