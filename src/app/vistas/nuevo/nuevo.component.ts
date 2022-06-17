@@ -19,11 +19,18 @@ export class NuevoComponent implements OnInit {
     })
   }
 
+  datos!:string;
   empleado :ListaEmpleadosI[]=[];
   mensaje! : any;
   activarSuccess: boolean = false;
   activarDanger: boolean = false;
   used!:Boolean;
+  codigoId!:any;
+  nombre!:string;
+  apellido!:string;
+  cedula!:string;
+  sexo!:string;
+  fechaNacimiento!:string;
 
   datosEmpleado!: EmpleadoI;
   crearForm = new FormGroup({    
@@ -36,6 +43,7 @@ export class NuevoComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    console.log("Id: "+this.codigoId+"\nNombre: "+this.nombre+"\nApellido: "+this.apellido+"\nCedula: "+this.cedula+"\nSexo: "+this.sexo+"\nFecha de nacimiento: "+this.fechaNacimiento);
     
   }
 

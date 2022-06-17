@@ -4,11 +4,11 @@
         <h1>CREAR EMPLEADO</h1>
         <hr>
 
-        <form [formGroup]="crearForm" (ngSubmit)="postForm(crearForm.value,id.value)" (click)="resetActivar()">
+        <form [formGroup]="crearForm" (ngSubmit)="postForm(crearForm.value,id.value)" (click)="resetActivar()" style="width: 50%; float:left;">
 
             <div class="form-group">
                 <label for="exampleFormControlInput1">id</label>
-                <input #id type="text" class="form-control" placeholder="id del empleado" formControlName="id" [ngClass]="{cambioColor : crearForm.controls['id'].dirty && crearForm.controls['id'].hasError('required') || crearForm.controls['id'].hasError('pattern')}">
+                <input #id type="text" class="form-control" placeholder="id del empleado" [(ngModel)]="codigoId" formControlName="id" [ngClass]="{cambioColor : crearForm.controls['id'].dirty && crearForm.controls['id'].hasError('required') || crearForm.controls['id'].hasError('pattern')}">
                 <div *ngIf="crearForm.controls['id'].dirty">
                         <label class="mensajeError" *ngIf="crearForm.controls['id'].hasError('required')">*Campo requerido</label>
                         <label class="mensajeError" *ngIf="crearForm.controls['id'].hasError('pattern')">*Solo ingrese numeros en este campo</label>
@@ -16,7 +16,7 @@
             </div>            
             <div class="form-group">
                 <label for="exampleFormControlInput2">Nombre</label>
-                <input type="text" class="form-control" placeholder="Nombre del empleado" formControlName="nombre" [ngClass]="{cambioColor : crearForm.controls['nombre'].dirty && crearForm.controls['nombre'].hasError('required') || crearForm.controls['nombre'].hasError('pattern')}">
+                <input type="text" class="form-control" placeholder="Nombre del empleado" [(ngModel)]="nombre" formControlName="nombre" [ngClass]="{cambioColor : crearForm.controls['nombre'].dirty && crearForm.controls['nombre'].hasError('required') || crearForm.controls['nombre'].hasError('pattern')}">
                 <div *ngIf="crearForm.controls['nombre'].dirty">
                     <label class="mensajeError" *ngIf="crearForm.controls['nombre'].hasError('required')">*Campo requerido</label>
                     <label class="mensajeError" *ngIf="crearForm.controls['nombre'].hasError('pattern')">*Solo ingrese letras en este campo sin caracteres especiales</label>
@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput3">Apellido</label>
-                <input type="text" class="form-control" placeholder="Apellido del empleado" formControlName="apellido" [ngClass]="{cambioColor : crearForm.controls['apellido'].dirty && crearForm.controls['apellido'].hasError('required') || crearForm.controls['apellido'].hasError('pattern')}">
+                <input type="text" class="form-control" placeholder="Apellido del empleado" [(ngModel)]="apellido" formControlName="apellido" [ngClass]="{cambioColor : crearForm.controls['apellido'].dirty && crearForm.controls['apellido'].hasError('required') || crearForm.controls['apellido'].hasError('pattern')}">
                 <div *ngIf="crearForm.controls['apellido'].dirty">
                     <label class="mensajeError" *ngIf="crearForm.controls['apellido'].hasError('required')">*Campo requerido</label>
                     <label class="mensajeError" *ngIf="crearForm.controls['apellido'].hasError('pattern')">*Solo ingrese letras en este campo sin caracteres especiales</label>
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput4">Cedula</label>
-                <input type="text" class="form-control" placeholder="Cedula del empleado" formControlName="cedula" [ngClass]="{cambioColor : crearForm.controls['cedula'].dirty && crearForm.controls['cedula'].hasError('required') || crearForm.controls['cedula'].hasError('pattern') || crearForm.controls['cedula'].hasError('minlength') || crearForm.controls['cedula'].hasError('maxlength')}">
+                <input type="text" class="form-control" placeholder="Cedula del empleado" [(ngModel)]="cedula" formControlName="cedula" [ngClass]="{cambioColor : crearForm.controls['cedula'].dirty && crearForm.controls['cedula'].hasError('required') || crearForm.controls['cedula'].hasError('pattern') || crearForm.controls['cedula'].hasError('minlength') || crearForm.controls['cedula'].hasError('maxlength')}">
                 <div *ngIf="crearForm.controls['cedula'].dirty">
                     <label class="mensajeError" *ngIf="crearForm.controls['cedula'].hasError('required')">&nbsp;*Campo requerido*</label>
                     <label class="mensajeError" *ngIf="crearForm.controls['cedula'].hasError('pattern')">&nbsp;*Solo ingrese numeros en este campo*</label>
@@ -42,7 +42,7 @@
             </div>
             <div>
                 <label for="exampleFormControlInput5">Sexo</label><br>
-                <select formControlName="sexo">
+                <select formControlName="sexo" [(ngModel)]="sexo">
                     <option value="No registrado"> Seleccione</option>
                     <option value="M">Masculino</option>
                     <option value="F">Femenino</option>
@@ -50,7 +50,7 @@
             </div>      
             <div class="form-group">
                 <label for="exampleFormControlInput6">Fecha de nacimiento</label>
-                <input type="date" class="form-control" placeholder="Fecha de nacimiento" formControlName="fechaNacimiento" [ngClass]="{cambioColor : crearForm.controls['fechaNacimiento'].dirty && crearForm.controls['fechaNacimiento'].hasError('required')}">
+                <input type="date" class="form-control" placeholder="Fecha de nacimiento" [(ngModel)]="fechaNacimiento" formControlName="fechaNacimiento" [ngClass]="{cambioColor : crearForm.controls['fechaNacimiento'].dirty && crearForm.controls['fechaNacimiento'].hasError('required')}">
                 <div *ngIf="crearForm.controls['fechaNacimiento'].dirty">
                     <label class="mensajeError" *ngIf="crearForm.controls['fechaNacimiento'].hasError('required')">*Campo requerido</label>
                 </div>
@@ -58,6 +58,34 @@
             <button type="submit"  style="border-radius: 20px;"  class="btn btn-primary" [disabled]="crearForm.invalid">Guardar</button>
             <button type="button" class="btn btn-primary" (click)="dashboard()" style="background-color: mediumseagreen; border-color: mediumseagreen; float: inline-end; border-radius: 20px;">Volver</button>             
         </form><br>  
+        <div style="float: left; width: 50%;">
+            <div style=" width: 90%; float: right; font-family: monospace;">
+                <b>
+                    DATOS REGISTRADOS ACTUALMENTE
+                    <hr>
+                </b>
+                <div *ngIf="codigoId == undefined && nombre == undefined && apellido == undefined && cedula == undefined && sexo == undefined && fechaNacimiento == undefined"><b>No se ha registrado ningun dato</b></div>
+                <div *ngIf="codigoId != undefined" >
+                    <b>Id:</b>&nbsp;&nbsp;{{codigoId}}<br>
+                </div>
+                <div *ngIf="nombre != undefined">
+                    <b>Nombre:</b>&nbsp;&nbsp;{{nombre}}<br>
+                </div>
+                <div *ngIf="apellido != undefined">
+                    <b>Apellido:</b>&nbsp;&nbsp;{{apellido}}<br>
+                </div>
+                <div *ngIf="cedula != undefined">
+                    <b>Cedula: </b>&nbsp;&nbsp;{{cedula}}<br>
+                </div>
+                <div *ngIf="sexo != undefined">
+                    <b>Sexo:</b>&nbsp;&nbsp;{{sexo}}<br>
+                </div>
+                <div *ngIf="fechaNacimiento != undefined">
+                    <b>Fecha de nacimiento:</b>&nbsp;&nbsp;{{fechaNacimiento}}
+                    <hr>
+                </div>                      
+            </div>            
+        </div>
         <div *ngIf="activarSuccess==true">
             <app-mensaje-success [mensaje]="mensaje"></app-mensaje-success>
         </div>
