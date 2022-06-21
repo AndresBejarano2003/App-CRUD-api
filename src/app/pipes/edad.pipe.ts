@@ -55,9 +55,10 @@ console.log("año: " + this.fechaEmpleado.getFullYear() + " mes: " + this.fechaE
     console.log("Dia actual: " + this.actualDate.getDate() + " Dia de nacimiento: " + diaNacimiento);
 */
     if(mesActual <= mesNacimiento){
-      if(this.actualDate.getDate() < diaNacimiento){               
-        edad-=1;   
-      }  
+      //Revisar esta parte para indicar la edad exacta
+      //if(this.actualDate.getDate() < diaNacimiento){               
+        edad -= 1;
+      //}  
     }
     //console.log("---------//-------------------//------------");
     
