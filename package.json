@@ -36,5 +36,20 @@
     "karma-jasmine": "~5.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.7.2"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.0.",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndresBejarano2003/App-CRUD-api.git"
+  },
+  "keywords": [
+    "!Andres107655203B"
+  ],
+  "author": "Andrés Bejarano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndresBejarano2003/App-CRUD-api/issues"
+  },
+  "homepage": "https://github.com/AndresBejarano2003/App-CRUD-api#readme"
 }
