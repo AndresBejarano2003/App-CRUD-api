@@ -1,5 +1,5 @@
 export interface ListaEmpleadosI{
-    fechaNacimiento:string;
+    fechaNacimiento:any;
     id:string;
     nombre:string;
     apellido:string;

@@ -1,47 +1,71 @@
 import { Injectable } from '@angular/core';
 import { ResponseI } from '../../modelos/response.interface';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, observable } from 'rxjs';
 import { ListaEmpleadosI } from '../../modelos/listaEmpleados.interface'
 import { EmpleadoI } from '../../modelos/empleado.interface';
+import { ControllerApiList } from 'src/app/modelos/ControllerUrl';
+import { Usuario } from 'src/app/modelos/Usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  url:string = "http://api.ci.saludplusweb.com/Api/Empleados/";
+  url: string = "https://localhost:7106/empleado/";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  postEmployees(form:EmpleadoI):Observable<ResponseI>{
-    let direccion = this.url + 'Crear';
-    console.log(direccion);
-    return this.http.post<ResponseI>(direccion,form);
+  postEmployees(form: EmpleadoI): Observable<ResponseI> {
+    return this.http.post<ResponseI>(
+      `${ControllerApiList.Empleado.Guardar}`,
+      form
+    );
   }
 
-  getEmployees():Observable<ListaEmpleadosI[]>{
+  getEmployees(): Observable<ListaEmpleadosI[]> {
     let direccion = this.url + 'Listado';
     console.log(direccion);
     return this.http.get<ListaEmpleadosI[]>(direccion);
   }
 
-  getOneEmployee(id:any):Observable<EmpleadoI>{
-    let direccion = this.url + 'Consulta/' + id;
-    console.log(direccion);
-    return this.http.get<EmpleadoI>(direccion);
+  getOneEmployee(idEmpleado: any): Observable<EmpleadoI> {
+    let params = new HttpParams().set("idEmpleado", idEmpleado);
+    console.log(params);
+    return this.http.get<EmpleadoI>(
+      `${ControllerApiList.Empleado.ListarPorId}`,
+      {
+        params: params,
+      });
   }
 
-  putEmployees(form:EmpleadoI):Observable<ResponseI>{
-    let direccion = this.url + "Actualizar";
-    console.log(direccion);
-    return this.http.put<ResponseI>(direccion, form);
+  putEmployees(form: EmpleadoI, idEmpleado: string): Observable<ResponseI> {
+    form.id = idEmpleado;
+    const empleado = this.http.put<EmpleadoI>(
+      `${ControllerApiList.Empleado.Actualizar}`,
+      form
+    );
+    return empleado;
   }
 
-  deleteEmployees(id:any):Observable<{}>{
-    let direccion = this.url + "Eliminar?Id=" + id;
-    console.log(direccion);
-    return this.http.delete(direccion);
+  deleteEmployees(idEmpleado: any): Observable<{}> {
+    let params = new HttpParams().set("idEmpleado", idEmpleado);
+    console.log(params);
+    return this.http.delete(
+      `${ControllerApiList.Empleado.Eliminar}`,
+      {
+        params: params,
+      });
+  }
+
+  getValidarUsuario(username: string, password: string): Observable<Usuario> {
+    let params = new HttpParams().set("username", username).set("password", password);
+    console.log(params);
+    return this.http.get<Usuario>(
+      `${ControllerApiList.Empleado.ValidarUsuario}`,
+      {
+        params: params,
+      });
   }
 
 }

@@ -35,8 +35,8 @@ export class NuevoComponent implements OnInit {
   datosEmpleado!: EmpleadoI;
   crearForm = new FormGroup({    
     id:new FormControl("", Validators.compose([Validators.required,Validators.pattern(/^[0-9]+$/)])),
-    nombre:new FormControl("", Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]+$/)])),
-    apellido:new FormControl("", Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]+$/)])),
+    nombre:new FormControl("", Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z áéíóúÁÉÍÓÚüÜñÑ\s]+$/)])),
+    apellido:new FormControl("", Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z áéíóúÁÉÍÓÚüÜñÑ\s]+$/)])),
     cedula:new FormControl("", Validators.compose([Validators.required, Validators.minLength(6),Validators.maxLength(10),Validators.pattern(/^[0-9]+$/)])),
     sexo:new FormControl(""),
     fechaNacimiento: new FormControl("", Validators.required)
