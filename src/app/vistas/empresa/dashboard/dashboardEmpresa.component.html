@@ -8,13 +8,16 @@
             </nav>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link text-white" routerLink="/dashboard"><i class="fas fa-home"></i> Inicio</a>
+                    <a class="nav-link text-white" routerLink="/dashboard"><i class="fa fa-home"></i> Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" routerLink="/informes"><i class="fas fa-chart-bar"></i> Informes</a>
+                    <a class="nav-link text-white" routerLink="/informes"><i class="fa fa-chart-bar"></i> Informes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" routerLink="/mi-cuenta"><i class="fas fa-user"></i> Mi Cuenta</a>
+                    <a class="nav-link text-white" routerLink="/mi-cuenta"><i class="fa fa-user"></i> Mi Cuenta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="logout()" routerLink="/mi-cuenta"><i class="fa fa-user"></i> Cerrar sesión</a>
                 </li>
             </ul>
         </div>
