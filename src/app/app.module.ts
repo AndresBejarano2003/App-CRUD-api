@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MensajeDangerComponent } from './plantillas/mensaje-danger/mensaje-danger.component';
 import { MensajeSuccessComponent } from './plantillas/mensaje-success/mensaje-success.component';
 import { EdadPipe } from './pipes/edad.pipe';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EdadPipe } from './pipes/edad.pipe';
     AppRoutingModule,
     ReactiveFormsModule, 
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
