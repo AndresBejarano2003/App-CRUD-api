@@ -6,6 +6,7 @@ import { ListaEmpleadosI } from '../../modelos/listaEmpleados.interface'
 import { EmpleadoI } from '../../modelos/empleado.interface';
 import { ControllerApiList } from 'src/app/modelos/ControllerUrl';
 import { Usuario } from 'src/app/modelos/Usuario';
+import { salesdata } from 'src/app/modelos/salesdata';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,10 @@ export class ApiService {
       {
         params: params,
       });
+  }
+
+  loadsalesdata(){
+    return this.http.get<salesdata[]>("http://localhost:3000/sales")
   }
 
 }

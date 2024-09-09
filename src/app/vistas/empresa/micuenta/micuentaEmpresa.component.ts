@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 Chart.register(...registerables)
 
 @Component({
-  selector: 'app-dashboard-Empresa',
-  templateUrl: './dashboardEmpresa.component.html',
-  styleUrls: ['./dashboardEmpresa.component.scss']
+  selector: 'app-micuenta-Empresa',
+  templateUrl: './micuentaEmpresa.component.html',
+  styleUrls: ['./micuentaEmpresa.component.scss']
 })
-export class DashboardEmpresaComponent implements OnInit {
+export class MiCuentaEmpresaComponent implements OnInit {
 
   empleados: ListaEmpleadosI[] = [];
   opcion!: string;
