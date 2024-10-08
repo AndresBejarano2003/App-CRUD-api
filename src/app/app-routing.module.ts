@@ -20,9 +20,9 @@ const routes: Routes = [
   //MÓDULOS DEL AUDITOR
   { path: 'dashboardAuditor', component: DashboardAuditorComponent },
   //MÓDULOS DE LA EMPRESA
-  { path: 'dashboardEmpresa', component: DashboardEmpresaComponent },
-  { path: 'informesEmpresa', component: InformesEmpresaComponent },
-  { path: 'miCuentaEmpresa', component: MiCuentaEmpresaComponent },
+  { path: 'dashboardEmpresa/:id', component: DashboardEmpresaComponent },
+  { path: 'informesEmpresa/:id', component: InformesEmpresaComponent },
+  { path: 'miCuentaEmpresa/:id', component: MiCuentaEmpresaComponent },
   //{ path: 'assessment', component: AssessmentComponent },  // Asegúrate de tener este componente creado
   //{ path: 'account', component: AccountComponent },  // Asegúrate de tener este componente creado
 ];
@@ -33,4 +33,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [LoginComponent, DashboardComponent, EditarComponent, NuevoComponent]
+export const routingComponents = [LoginComponent, DashboardComponent, EditarComponent, NuevoComponent, DashboardAuditorComponent, DashboardEmpresaComponent, InformesEmpresaComponent, MiCuentaEmpresaComponent]

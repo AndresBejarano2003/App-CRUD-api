@@ -69,6 +69,16 @@ export class ApiService {
       });
   }
 
+  getDataUser(idUser: any): Observable<Usuario> {
+    let params = new HttpParams().set("idUser", idUser);
+    console.log(params);
+    return this.http.get<Usuario>(
+      `${ControllerApiList.Empleado.getDataUser}`,
+      {
+        params: params,
+      });
+  }
+
   loadsalesdata(){
     return this.http.get<salesdata[]>("http://localhost:3000/sales")
   }

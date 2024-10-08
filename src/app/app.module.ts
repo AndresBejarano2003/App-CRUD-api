@@ -12,6 +12,7 @@ import { MensajeSuccessComponent } from './plantillas/mensaje-success/mensaje-su
 import { EdadPipe } from './pipes/edad.pipe';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     HttpClientModule,
     NgxChartsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

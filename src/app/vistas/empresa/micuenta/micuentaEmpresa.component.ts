@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../servicios/api/api.service';
 import { ListaEmpleadosI } from '../../../modelos/listaEmpleados.interface';
 import { Chart, registerables } from 'chart.js';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Usuario } from 'src/app/modelos/Usuario';
+import { DatePipe } from '@angular/common';
+
 Chart.register(...registerables)
 
 @Component({
@@ -14,37 +18,119 @@ export class MiCuentaEmpresaComponent implements OnInit {
 
   empleados: ListaEmpleadosI[] = [];
   opcion!: string;
+  fecNacim!: string;
+  activarSuccess: boolean = false;
+  activarDanger: boolean = false;
+  used!: Boolean;
+  mensaje!: any;
 
-  constructor(private api: ApiService, private router: Router) { }
+  datosUsuario: Usuario = (
+    {
+      cedulaxx: "",
+      nombresx: "",
+      apellido: "",
+      fecNacim: new Date(),
+      sexoxxxx: "No registrado",
+      emailxxx: "",
+      telefono: "",
+      celularx: "",
+      direccio: "",
+      idCiudad: 0,
+      idMunici: 0,
+      idPaisxx: 0,
+      fotoxxxx: "",
+      username: "",
+      password: "",
+      tipouser: "",
+      usercrea: "",
+      fechcrea: new Date(),
+      horacrea: "",
+      usermodi: "",
+      fechmodi: new Date(),
+      horamodi: "",
+    }
+  );
+
+  datosForm = new FormGroup({
+
+    cedulaxx: new FormControl("", Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(10), Validators.pattern(/^[0-9]+$/)])),
+    nombresx: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z áéíóúÁÉÍÓÚüÜñÑ\s]+$/)])),
+    apellido: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z áéíóúÁÉÍÓÚüÜñÑ\s]+$/)])),
+    fecNacim: new FormControl(new Date(), Validators.required),
+    sexoxxxx: new FormControl("No registrado", Validators.required),
+    emailxxx: new FormControl("", Validators.required),
+    telefono: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[0-9]+$/)])),
+    celularx: new FormControl("", Validators.required),
+    direccio: new FormControl(""),
+    idCiudad: new FormControl(0),
+    idMunici: new FormControl(0),
+    idPaisxx: new FormControl(0),
+    fotoxxxx: new FormControl(""),
+    username: new FormControl(""),
+    password: new FormControl(""),
+    tipouser: new FormControl(""),
+    usercrea: new FormControl(""),
+    fechcrea: new FormControl(new Date()),
+    horacrea: new FormControl(""),
+    usermodi: new FormControl(""),
+    fechmodi: new FormControl(new Date()),
+    horamodi: new FormControl(""),
+  });
+  cedulaxx!: string | null;
+
+  constructor(private api: ApiService, private router: Router, private activeroute: ActivatedRoute, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    this.renderCharts();
+    this.cedulaxx = this.activeroute.snapshot.paramMap.get('id');
+    this.getDataUser(this.cedulaxx);
   }
 
-  renderCharts() {
-    var ctx1 = document.getElementById('complianceChart') as HTMLCanvasElement;
-    new Chart(ctx1, {
-      type: 'doughnut',
-      data: {
-        labels: ['En Cumplimiento', 'Pendiente', 'No Cumple'],
-        datasets: [{
-          data: [60, 25, 15],
-          backgroundColor: ['#28a745', '#ffc107', '#dc3545']
-        }]
+  getDataUser(idUser: any) {
+    this.api.getDataUser(idUser).subscribe(data => {
+      //this.mensaje = "Se ha creado un nuevo usuario"
+      this.datosUsuario = data
+      let mMatriz = this.datosUsuario.fecNacim.split(" ");
+      console.log(mMatriz);
+      let mFecha = mMatriz[0].split("/");
+      console.log("mFecha");
+      console.log(mFecha);
+      if(mFecha[0] < 10){
+        mFecha[0] = "0" + mFecha[0];
       }
-    });
-
-    var ctx2 = document.getElementById('isoComplianceChart') as HTMLCanvasElement;
-    new Chart(ctx2, {
-      type: 'doughnut',
-      data: {
-        labels: ['Compliant', 'Non-compliant'],
-        datasets: [{
-          data: [45, 55],
-          backgroundColor: ['#007bff', '#dc3545']
-        }]
-      }
-    });
+      console.log(mFecha[2] + "-" + mFecha[1] + "-" + mFecha[0]);
+      
+      this.datosUsuario.fecNacim = mFecha[2] + "-" + mFecha[1] + "-" + mFecha[0];
+      this.datosForm.setValue({
+        'cedulaxx': this.datosUsuario.cedulaxx,
+        'nombresx': this.datosUsuario.nombresx,
+        'apellido': this.datosUsuario.apellido,
+        'fecNacim': this.datosUsuario.fecNacim,
+        'sexoxxxx': this.datosUsuario.sexoxxxx,
+        'emailxxx': this.datosUsuario.emailxxx,
+        'telefono': this.datosUsuario.telefono,
+        'celularx': this.datosUsuario.celularx,
+        'direccio': this.datosUsuario.direccio,
+        'idCiudad': this.datosUsuario.idCiudad,
+        'idMunici': this.datosUsuario.idMunici,
+        'idPaisxx': this.datosUsuario.idPaisxx,
+        'fotoxxxx': this.datosUsuario.fotoxxxx,
+        'username': this.datosUsuario.username,
+        'password': this.datosUsuario.password,
+        'tipouser': this.datosUsuario.tipouser,
+        'usercrea': this.datosUsuario.usercrea,
+        'fechcrea': this.datosUsuario.fechcrea,
+        'horacrea': this.datosUsuario.horacrea,
+        'usermodi': this.datosUsuario.usermodi,
+        'fechmodi': this.datosUsuario.fechmodi,
+        'horamodi': this.datosUsuario.horamodi,
+      });
+      //this.activarSuccess = true;
+      //this.activarDanger = false;
+    }, rest => {
+      this.mensaje = "Error ";
+      this.activarDanger = true;
+      this.activarSuccess = false;
+    })
   }
 
   //Se direcciona hacia el login
@@ -53,14 +139,56 @@ export class MiCuentaEmpresaComponent implements OnInit {
   }
   //Se direcciona hacia el dashboard
   goInicio() {
-    this.router.navigate(['dashboardEmpresa']);
+    this.router.navigate(['dashboardEmpresa', this.cedulaxx]);
   }
   //Se direcciona hacia los informes
   goInformes() {
-    this.router.navigate(['informesEmpresa']);
+    this.router.navigate(['informesEmpresa', this.cedulaxx]);
   }
   //Se direcciona hacia los datos de la cuenta
   goCuenta() {
-    this.router.navigate(['miCuentaEmpresa']);
+    this.router.navigate(['miCuentaEmpresa', this.cedulaxx]);
   }
+
+  postForm(form: any) {
+    // 
+    // if(this.used == true){
+    //   console.log("El id YA está usado");
+    //   this.mensaje="El id ingresado está en uso, digite otro";
+    //   this.activarDanger=true;
+    //   this.activarSuccess=false;
+    // }else{
+    //   this.api.postEmployees(form).subscribe(data =>{
+    //     console.log("Nuevo empleado:")
+    //     console.log(data)
+    //     this.mensaje="Se ha creado un nuevo usuario"      
+    //     this.crearForm.reset();
+    //     this.activarSuccess=true;
+    //     this.activarDanger=false;
+    //   }, rest =>{      
+    //     this.mensaje = "Error ";
+    //     this.activarDanger=true;
+    //     this.activarSuccess=false;
+    //   })
+    //         
+    // }  
+    console.log("Se termina de ejecutar el metodo postForm");
+  }
+
+  resetActivar() {
+    this.activarSuccess = false;
+    this.activarDanger = false;
+    this.used = false;
+  }
+
+  formatDate(dateString2: any): Date {
+
+    console.log("FECHA 1");
+    console.log(dateString2);
+    console.log("new Date('YYYY-MM-AA');");
+    console.log(new Date("YYYY-MM-AA"));
+    return new Date("YYYY-MM-AA");
+  }
+
+
 }

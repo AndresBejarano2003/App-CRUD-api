@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../servicios/api/api.service';
 import { ListaEmpleadosI } from '../../../modelos/listaEmpleados.interface';
 import { Chart, registerables } from 'chart.js';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 Chart.register(...registerables)
 
 @Component({
@@ -14,10 +14,12 @@ export class InformesEmpresaComponent implements OnInit {
 
   empleados: ListaEmpleadosI[] = [];
   opcion!: string;
+  cedulaxx!: string | null;
 
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ApiService, private router: Router, private activeroute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.cedulaxx = this.activeroute.snapshot.paramMap.get('id');
     this.renderCharts();
   }
 
@@ -53,14 +55,14 @@ export class InformesEmpresaComponent implements OnInit {
   }
   //Se direcciona hacia el dashboard
   goInicio() {
-    this.router.navigate(['dashboardEmpresa']);
+    this.router.navigate(['dashboardEmpresa', this.cedulaxx]);
   }
   //Se direcciona hacia los informes
   goInformes() {
-    this.router.navigate(['informesEmpresa']);
+    this.router.navigate(['informesEmpresa', this.cedulaxx]);
   }
   //Se direcciona hacia los datos de la cuenta
   goCuenta() {
-    this.router.navigate(['miCuentaEmpresa']);
+    this.router.navigate(['miCuentaEmpresa', this.cedulaxx]);
   }
 }

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         next: (data) => {
           console.log('Usuario válido:', data);
           // Aquí puedes manejar la respuesta exitosa, por ejemplo, redirigir al usuario
-          switch(data.tipo){
+          switch(data.tipouser){
             case "ADMIN":
               this.router.navigate(['dashboard'])
               break;
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['dashboardAuditor'])
               break;
               case "EMPRESA":
-              this.router.navigate(['dashboardEmpresa'])
+              this.router.navigate(['dashboardEmpresa', data.cedulaxx])
             break;
           }
         },
