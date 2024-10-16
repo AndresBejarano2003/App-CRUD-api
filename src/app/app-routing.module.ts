@@ -8,6 +8,9 @@ import { DashboardEmpresaComponent } from './vistas/empresa/dashboard/dashboardE
 import { DashboardAuditorComponent } from './vistas/auditor/dashboard/dashboardAuditor.component';
 import { InformesEmpresaComponent } from './vistas/empresa/informes/informesEmpresa.component';
 import { MiCuentaEmpresaComponent } from './vistas/empresa/micuenta/micuentaEmpresa.component';
+import { InformesAuditorComponent } from './vistas/auditor/informes/informesAuditor.component';
+import { MiCuentaAuditorComponent } from './vistas/auditor/micuenta/micuentaAuditor.component';
+import { CalificacionesComponent } from './vistas/auditor/calificaciones/calificaciones.component';
 
 
 const routes: Routes = [
@@ -17,12 +20,15 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'nuevo', component: NuevoComponent },
   { path: 'editar/:id', component: EditarComponent },
-  //MÓDULOS DEL AUDITOR
-  { path: 'dashboardAuditor', component: DashboardAuditorComponent },
   //MÓDULOS DE LA EMPRESA
   { path: 'dashboardEmpresa/:id', component: DashboardEmpresaComponent },
   { path: 'informesEmpresa/:id', component: InformesEmpresaComponent },
   { path: 'miCuentaEmpresa/:id', component: MiCuentaEmpresaComponent },
+  //MÓDULOS DE LA AUDITOR
+  { path: 'dashboardAuditor/:id', component: DashboardAuditorComponent },
+  { path: 'informesAuditor/:id', component: InformesAuditorComponent },
+  { path: 'miCuentaAuditor/:id', component: MiCuentaAuditorComponent },
+  { path: 'calificaciones/:id', component: CalificacionesComponent },
   //{ path: 'assessment', component: AssessmentComponent },  // Asegúrate de tener este componente creado
   //{ path: 'account', component: AccountComponent },  // Asegúrate de tener este componente creado
 ];
@@ -33,4 +39,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [LoginComponent, DashboardComponent, EditarComponent, NuevoComponent, DashboardAuditorComponent, DashboardEmpresaComponent, InformesEmpresaComponent, MiCuentaEmpresaComponent]
+export const routingComponents = [LoginComponent, DashboardComponent, EditarComponent, NuevoComponent, DashboardAuditorComponent, DashboardEmpresaComponent, InformesEmpresaComponent, MiCuentaEmpresaComponent, DashboardAuditorComponent, InformesAuditorComponent, MiCuentaAuditorComponent]

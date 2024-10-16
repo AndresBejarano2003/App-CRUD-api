@@ -1,0 +1,85 @@
+<!-- dashboard.component.html -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Barra de navegación lateral -->
+        <div class="col-md-2 bg-dark text-white sidebar">
+            <nav class="navbar navbar-dark">
+                <span class="navbar-brand mb-0 h1">Dashboard Auditor</span>
+            </nav>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goInicio()" routerLink="/dashboard"><i
+                            class="fa fa-home"></i> Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goCalificaciones()" routerLink="/calificaciones"><i
+                            class="fa fa-chart-bar"></i> Calificar informes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goInformes()" routerLink="/informes"><i
+                            class="fa fa-chart-bar"></i> Subir informes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goCuenta()" routerLink="/mi-cuenta"><i
+                            class="fa fa-user"></i> Mi Cuenta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="logout()" routerLink="/mi-cuenta"><i
+                            class="fa-solid fa-door-open"></i>
+                        Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10 offset-md-2">
+
+            <div class="container mt-5">
+                <h2>Subir y Asignar Tareas</h2>
+                <p class="lead">Utilice el siguiente formulario para subir tareas y asignarlas a los responsables.</p>
+
+                <!-- Formulario para subir y asignar tareas -->
+                <div class="form-section">
+                    <form id="taskForm">
+                        <!-- Campo para el nombre de la tarea -->
+                        <div class="form-group">
+                            <label for="taskName">Nombre de la Tarea</label>
+                            <input type="text" class="form-control" id="taskName"
+                                placeholder="Ingrese el nombre de la tarea" required>
+                        </div>
+
+                        <!-- Campo para subir archivos relacionados a la tarea -->
+                        <div class="form-group">
+                            <label for="taskFile">Subir Archivo</label>
+                            <input type="file" class="form-control-file" id="taskFile">
+                        </div>
+
+                        <!-- Selector para asignar la tarea a un responsable -->
+                        <div class="form-group">
+                            <label for="taskAssignee">Asignar a</label>
+                            <select class="form-control" id="taskAssignee" required>
+                                <option value="">Seleccione un responsable</option>
+                                <option value="Usuario 1">Usuario 1</option>
+                                <option value="Usuario 2">Usuario 2</option>
+                                <option value="Usuario 3">Usuario 3</option>
+                            </select>
+                        </div>
+
+                        <!-- Campo para establecer la fecha límite -->
+                        <div class="form-group">
+                            <label for="taskDueDate">Fecha Límite</label>
+                            <input type="date" class="form-control" id="taskDueDate" required>
+                        </div>
+
+                        <!-- Campo para la descripción de la tarea -->
+                        <div class="form-group">
+                            <label for="taskDescription">Descripción de la Tarea</label>
+                            <textarea class="form-control" id="taskDescription" rows="4"
+                                placeholder="Ingrese una descripción detallada de la tarea"></textarea>
+                        </div>
+
+                        <!-- Botón para enviar el formulario -->
+                        <button type="submit" class="btn btn-primary">Subir y Asignar Tarea</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

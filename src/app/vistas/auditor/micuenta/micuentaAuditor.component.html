@@ -4,20 +4,28 @@
         <!-- Barra de navegación lateral -->
         <div class="col-md-2 bg-dark text-white sidebar">
             <nav class="navbar navbar-dark">
-                <span class="navbar-brand mb-0 h1">Dashboard empresa</span>
+                <span class="navbar-brand mb-0 h1">Dashboard Auditor</span>
             </nav>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link text-white" (click)="goInicio()"><i class="fa fa-home"></i> Inicio</a>
+                    <a class="nav-link text-white" (click)="goInicio()" routerLink="/dashboard"><i
+                            class="fa fa-home"></i> Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" (click)="goInformes()"><i class="fa fa-chart-bar"></i> Informes</a>
+                    <a class="nav-link text-white" (click)="goCalificaciones()" routerLink="/calificaciones"><i
+                            class="fa fa-chart-bar"></i> Calificar informes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" (click)="goCuenta()"><i class="fa fa-user"></i> Mi Cuenta</a>
+                    <a class="nav-link text-white" (click)="goInformes()" routerLink="/informes"><i
+                            class="fa fa-chart-bar"></i> Subir informes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" (click)="logout()"><i class="fa-solid fa-door-open"></i>
+                    <a class="nav-link text-white" (click)="goCuenta()" routerLink="/mi-cuenta"><i
+                            class="fa fa-user"></i> Mi Cuenta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="logout()" routerLink="/mi-cuenta"><i
+                            class="fa-solid fa-door-open"></i>
                         Cerrar sesión</a>
                 </li>
             </ul>
@@ -118,24 +126,24 @@
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                             <div class="form-group">
                                                 <label for="idCiudad">Ciudad</label>
-                                                    <select class="form-control" id="idCiudad" formControlName="idCiudad">
-                                                        <option value="0">Seleccione</option>
-                                                        <option value="1">Bogotá D.C.</option>
-                                                        <option value="2">Soacha</option>
-                                                        <option value="3">Chia</option>
-                                                        <option value="4">Cajicá</option>
-                                                    </select>
+                                                <select class="form-control" id="idCiudad" formControlName="idCiudad">
+                                                    <option value="0">Seleccione</option>
+                                                    <option value="1">Bogotá D.C.</option>
+                                                    <option value="2">Soacha</option>
+                                                    <option value="3">Chia</option>
+                                                    <option value="4">Cajicá</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                             <div class="form-group">
                                                 <label for="idMunici">Departamento</label>
-                                                    <select class="form-control" id="idMunici" formControlName="idMunici">
-                                                        <option value="0">Seleccione</option>
-                                                        <option value="1">Cundinamarca</option>
-                                                        <option value="2">Antioquia</option>
-                                                        <option value="3">Cauca</option>
-                                                    </select>
+                                                <select class="form-control" id="idMunici" formControlName="idMunici">
+                                                    <option value="0">Seleccione</option>
+                                                    <option value="1">Cundinamarca</option>
+                                                    <option value="2">Antioquia</option>
+                                                    <option value="3">Cauca</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">

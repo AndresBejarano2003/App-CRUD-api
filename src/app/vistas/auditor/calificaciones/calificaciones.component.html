@@ -1,0 +1,80 @@
+<!-- dashboard.component.html -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Barra de navegación lateral -->
+        <div class="col-md-2 bg-dark text-white sidebar">
+            <nav class="navbar navbar-dark">
+                <span class="navbar-brand mb-0 h1">Dashboard Auditor</span>
+            </nav>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goInicio()" routerLink="/dashboard"><i
+                            class="fa fa-home"></i> Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goCalificaciones()" routerLink="/calificaciones"><i
+                            class="fa fa-chart-bar"></i> Calificar informes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goInformes()" routerLink="/informes"><i
+                            class="fa fa-chart-bar"></i> Subir informes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goCuenta()" routerLink="/mi-cuenta"><i
+                            class="fa fa-user"></i> Mi Cuenta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="logout()" routerLink="/mi-cuenta"><i
+                            class="fa-solid fa-door-open"></i>
+                        Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10 offset-md-2">
+            <div class="container mt-5">
+                <h2>Calificar Informes Subidos</h2>
+                <p class="lead">Por favor, califique los informes subidos en base a su calidad.</p>
+
+                <!-- Lista de informes para calificar -->
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <h5>Informe 1: Seguridad de la Información</h5>
+                        <p>Fecha de Subida: 10 Octubre 2024</p>
+                        <button class="btn btn-primary btn-sm"><i class="fa-solid fa-magnifying-glass"></i>
+                            Ver anexo</button><br><br>
+                        <label>Calificación:</label>
+                        <div class="star-rating" data-informe="1">
+                            <i class="fas fa-star" data-value="1"></i>
+                            <i class="fas fa-star" data-value="2"></i>
+                            <i class="fas fa-star" data-value="3"></i>
+                            <i class="fas fa-star" data-value="4"></i>
+                            <i class="fas fa-star" data-value="5"></i>
+                        </div>
+                        <textarea class="form-control mt-3" rows="3"
+                            placeholder="Añadir un comentario sobre el informe..."></textarea>
+                    </div>
+
+                    <div class="list-group-item">
+                        <h5>Informe 2: Gestión de Riesgos</h5>
+                        <p>Fecha de Subida: 12 Octubre 2024</p>
+                        <button class="btn btn-primary btn-sm"><i class="fa-solid fa-magnifying-glass"></i>
+                            Ver anexo</button><br><br>
+                        <label>Calificación:</label>
+                        <div class="star-rating" data-informe="2">
+                            <i class="fas fa-star" data-value="1"></i>
+                            <i class="fas fa-star" data-value="2"></i>
+                            <i class="fas fa-star" data-value="3"></i>
+                            <i class="fas fa-star" data-value="4"></i>
+                            <i class="fas fa-star" data-value="5"></i>
+                        </div>
+                        <textarea class="form-control mt-3" rows="3"
+                            placeholder="Añadir un comentario sobre el informe..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Botón para enviar la calificación -->
+                <button class="btn btn-primary mt-4">Enviar Calificación</button>
+            </div>
+        </div>
+    </div>
+</div>

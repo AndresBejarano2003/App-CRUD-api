@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../servicios/api/api.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ListaEmpleadosI } from '../../../modelos/listaEmpleados.interface';
+import { Chart, registerables } from 'chart.js';
+import { ActivatedRoute, Router } from '@angular/router';
+Chart.register(...registerables)
 
 @Component({
-  selector: 'app-dashboard-Auditor',
-  templateUrl: './dashboardAuditor.component.html',
-  styleUrls: ['./dashboardAuditor.component.scss']
+  selector: 'app-calificaciones',
+  templateUrl: './calificaciones.component.html',
+  styleUrls: ['./calificaciones.component.scss']
 })
-export class DashboardAuditorComponent implements OnInit {
+export class CalificacionesComponent implements OnInit {
 
   empleados: ListaEmpleadosI[] = [];
   opcion!: string;
@@ -18,25 +20,33 @@ export class DashboardAuditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.cedulaxx = this.activeroute.snapshot.paramMap.get('id');
-    this.api.getEmployees().subscribe(data => {
-      console.log(data)
-      this.empleados = data;
+    this.renderCharts();
+  }
+
+  renderCharts() {
+    var ctx1 = document.getElementById('complianceChart') as HTMLCanvasElement;
+    new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        labels: ['En Cumplimiento', 'Pendiente', 'No Cumple'],
+        datasets: [{
+          data: [60, 25, 15],
+          backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+        }]
+      }
     });
-  }
 
-  //Se direcciona para crear un nuevo empleado
-  nuevoEmpleado() {
-    this.router.navigate(['nuevo']);
-  }
-
-  //Se direcciona para editar un empleado
-  actualizarEmpleado(id: any) {
-    this.router.navigate(['editar', id]);
-  }
-
-  //Se direcciona hacia el login
-  login() {
-    this.router.navigate(['login']);
+    var ctx2 = document.getElementById('isoComplianceChart') as HTMLCanvasElement;
+    new Chart(ctx2, {
+      type: 'doughnut',
+      data: {
+        labels: ['Compliant', 'Non-compliant'],
+        datasets: [{
+          data: [45, 55],
+          backgroundColor: ['#007bff', '#dc3545']
+        }]
+      }
+    });
   }
 
   //Se direcciona hacia el login
@@ -59,5 +69,4 @@ export class DashboardAuditorComponent implements OnInit {
   goCuenta() {
     this.router.navigate(['miCuentaAuditor', this.cedulaxx]);
   }
-
 }
