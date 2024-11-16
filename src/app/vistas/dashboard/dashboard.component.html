@@ -7,7 +7,7 @@
     <div style="float: left;">
         <div><b> SELECCIONE EL COLOR DEL BOTÓN</b></div><br>
         <select [(ngModel)]="opcion">
-            <option >--Seleccione--</option>
+            <option>--Seleccione--</option>
             <option value="greenyellow">Verde</option>
             <option value="grey">Gris</option>
             <option value="deepskyblue">Azul</option>
@@ -15,19 +15,24 @@
         </select><br><br>
         <div [ngSwitch]="opcion">
             <div *ngSwitchDefault>
-                <button type="button" style="border-radius: 20px; background-color:orange; border-color: orange;" class="btn btn-primary" (click)="login()" >Cerrar sesión</button>
+                <button type="button" style="border-radius: 20px; background-color:orange; border-color: orange;"
+                    class="btn btn-primary" (click)="login()">Cerrar sesión</button>
             </div>
             <div *ngSwitchCase="'greenyellow'">
-                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}" class="btn btn-primary" (click)="login()" >Cerrar sesión</button>
+                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}"
+                    class="btn btn-primary" (click)="login()">Cerrar sesión</button>
             </div>
             <div *ngSwitchCase="'grey'">
-                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}" class="btn btn-primary" (click)="login()" >Cerrar sesión</button>
+                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}"
+                    class="btn btn-primary" (click)="login()">Cerrar sesión</button>
             </div>
             <div *ngSwitchCase="'deepskyblue'">
-                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}" class="btn btn-primary" (click)="login()" >Cerrar sesión</button>
+                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}"
+                    class="btn btn-primary" (click)="login()">Cerrar sesión</button>
             </div>
             <div *ngSwitchCase="'red'">
-                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}" class="btn btn-primary" (click)="login()" >Cerrar sesión</button>
+                <button type="button" [ngStyle]="{'background-color':opcion, 'border-color':opcion}"
+                    class="btn btn-primary" (click)="login()">Cerrar sesión</button>
             </div>
         </div><br><br>
     </div>
@@ -36,33 +41,28 @@
     <div class="container">
         <table id="tabla1" class="table table-hover" style="border-bottom-color: gainsboro;">
             <thead>
-                <tr style="background-color:gainsboro; width: 100%; height: 20px;" >
-                <th scope="col" >Id</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Cedula</th>
-                <th scope="col">Sexo</th>
-                <th scope="col">Fecha de nacimiento</th>
-                <th scope="col">Edad</th>
+                <tr style="background-color:gainsboro; width: 100%; height: 20px;">
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Cedula</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">Fecha de nacimiento</th>
+                    <th scope="col">Edad</th>
                 </tr>
             </thead>
-        </table>
-    </div>
-    
-    <div class="container" style="overflow: auto; height: 210px; width: 100%;">
-        <table id="tabla1" class="table table-hover" style="border-bottom-color: gainsboro; ">
             <tbody>
                 <tr *ngFor="let empleado of empleados" (click)="actualizarEmpleado(empleado.id)">
-                <th scope="row">{{empleado.id}}</th>
-                <td >{{empleado.nombre}}</td>
-                <td>{{empleado.apellido}}</td>
-                <td>{{empleado.cedula}}</td>
-                <td >{{empleado.sexo}}</td>
-                <td>{{empleado.fechaNacimiento}}</td>
-                <td>{{empleado.fechaNacimiento | edad}}</td>
-                </tr>    
+                    <th scope="row">{{empleado.id}}</th>
+                    <td>{{empleado.nombre}}</td>
+                    <td>{{empleado.apellido}}</td>
+                    <td>{{empleado.cedula}}</td>
+                    <td>{{empleado.sexo}}</td>
+                    <td>{{empleado.fechaNacimiento}}</td>
+                    <td>{{empleado.fechaNacimiento | edad}}</td>
+                </tr>
             </tbody>
         </table>
     </div>
-</div>    
+</div>
 <app-footer></app-footer>

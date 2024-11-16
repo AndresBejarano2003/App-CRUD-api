@@ -4,7 +4,7 @@
         <!-- Barra de navegación lateral -->
         <div class="col-md-2 bg-dark text-white sidebar">
             <nav class="navbar navbar-dark">
-                <span class="navbar-brand mb-0 h1">Dashboard empresa</span>
+                <span class="navbar-brand mb-0 h1">Dashboard Auditor</span>
             </nav>
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -12,8 +12,12 @@
                             class="fa fa-home"></i> Inicio</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goCalificaciones()" routerLink="/calificaciones"><i
+                            class="fa fa-chart-bar"></i> Calificar informes</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-white" (click)="goInformes()" routerLink="/informes"><i
-                            class="fa fa-chart-bar"></i> Evidencias</a>
+                            class="fa fa-chart-bar"></i> Usuarios empresa</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" (click)="goCuenta()" routerLink="/mi-cuenta"><i
@@ -25,6 +29,40 @@
                         Cerrar sesión</a>
                 </li>
             </ul>
+        </div>
+
+        <div>
+            <div class="container">
+                <table id="tabla1" class="table table-hover" style="border-bottom-color: gainsboro;">
+                    <thead>
+                        <tr style="background-color:gainsboro; width: 100%; height: 20px;">
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Cedula</th>
+                            <th scope="col">Sexo</th>
+                            <th scope="col">Fecha de nacimiento</th>
+                            <th scope="col">Edad</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="container" style="overflow: auto; height: 210px; width: 100%;">
+                <table id="tabla1" class="table table-hover" style="border-bottom-color: gainsboro; ">
+                    <tbody>
+                        <tr *ngFor="let empleado of empleados" (click)="actualizarEmpresa(empleado.id)">
+                            <th scope="row">{{empleado.id}}</th>
+                            <td>{{empleado.nombre}}</td>
+                            <td>{{empleado.apellido}}</td>
+                            <td>{{empleado.cedula}}</td>
+                            <td>{{empleado.sexo}}</td>
+                            <td>{{empleado.fechaNacimiento}}</td>
+                            <td>{{empleado.fechaNacimiento | edad}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col-md-10 offset-md-2">
 
@@ -58,26 +96,35 @@
                                 <thead>
                                     <tr>
                                         <th>Tema</th>
-                                        <th>Estado</th>
-                                        <th>Subir Evidencia</th>
                                         <th>Pregunta</th>
+                                        <th>Evidencia</th>
+                                        <th>Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>Requisito 1</td>
-                                        <td><span class="badge badge-success">En Cumplimiento</span>
-                                        </td>
-                                        <td><button class="btn btn-primary btn-sm"><i class="fas fa-upload"></i>
-                                                Subir</button></td>
                                         <td>Describa cómo se cumple este requisito.</td>
+                                        <td><button class="btn btn-primary btn-sm"><i class="fa fa-file"></i>
+                                                Ver evidencia</button></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option value="PENDIENTE">PENDIENTE</option>
+                                                <option value="EN CUMPLIMIENTO">EN CUMPLIMIENTO</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Requisito 2</td>
-                                        <td><span class="badge badge-warning">Pendiente</span></td>
-                                        <td><button class="btn btn-primary btn-sm"><i class="fas fa-upload"></i>
-                                                Subir</button></td>
                                         <td>Proporcione evidencia del cumplimiento.</td>
+                                        <td><button class="btn btn-primary btn-sm"><i class="fa fa-file"></i>
+                                                Ver evidencia</button></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option value="PENDIENTE">PENDIENTE</option>
+                                                <option value="EN CUMPLIMIENTO">EN CUMPLIMIENTO</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -98,52 +145,66 @@
                                 <thead>
                                     <tr>
                                         <th>Tema</th>
-                                        <th>Estado</th>
-                                        <th>Aplica</th>
-                                        <th>Subir Evidencia</th>
                                         <th>Pregunta</th>
+                                        <th>Aplica</th>
+                                        <th>Evidencia</th>
+                                        <th>Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>Control A.5</td>
-                                        <td><span class="badge badge-danger">No Cumple</span></td>
+                                        <td>¿Se han implementado las medidas necesarias?</td>
                                         <td>
                                             <select class="form-control">
                                                 <option value="si">Sí</option>
                                                 <option value="no">No</option>
                                             </select>
                                         </td>
-                                        <td><button class="btn btn-primary btn-sm"><i class="fas fa-upload"></i>
-                                                Subir</button></td>
-                                        <td>¿Se han implementado las medidas necesarias?</td>
+                                        <td><button class="btn btn-primary btn-sm"><i class="fa fa-file"></i>
+                                                Ver evidencia</button></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option value="CUMPLE">CUMPLE</option>
+                                                <option value="NO CUMPLE">NO CUMPLE</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Control A.6</td>
-                                        <td><span class="badge badge-warning">Pendiente</span></td>
+                                        <td>¿Existe un plan de acción para este control?</td>
                                         <td>
                                             <select class="form-control">
                                                 <option value="si">Sí</option>
                                                 <option value="no">No</option>
                                             </select>
                                         </td>
-                                        <td><button class="btn btn-primary btn-sm"><i class="fas fa-upload"></i>
-                                                Subir</button></td>
-                                        <td>¿Existe un plan de acción para este control?</td>
+                                        <td><button class="btn btn-primary btn-sm"><i class="fa fa-file"></i>
+                                                Ver evidencia</button></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option value="CUMPLE">CUMPLE</option>
+                                                <option value="NO CUMPLE">NO CUMPLE</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Control A.8</td>
-                                        <td><span class="badge badge-success">En Cumplimiento</span>
-                                        </td>
+                                        <td>Proporcione documentación que respalde este control.</td>
                                         <td>
                                             <select class="form-control">
                                                 <option value="si">Sí</option>
                                                 <option value="no">No</option>
                                             </select>
                                         </td>
-                                        <td><button class="btn btn-primary btn-sm"><i class="fas fa-upload"></i>
-                                                Subir</button></td>
-                                        <td>Proporcione documentación que respalde este control.</td>
+                                        <td><button class="btn btn-primary btn-sm"><i class="fa fa-file"></i>
+                                                Ver evidencia</button></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option value="CUMPLE">CUMPLE</option>
+                                                <option value="NO CUMPLE">NO CUMPLE</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -216,4 +277,3 @@
             </script>
         </div>
     </div>
-</div>

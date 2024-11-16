@@ -3,30 +3,30 @@ import { ApiService } from '../../../servicios/api/api.service';
 import { ListaEmpleadosI } from '../../../modelos/listaEmpleados.interface';
 import { Chart, registerables } from 'chart.js';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ListaInformesI } from 'src/app/modelos/listaInformes.interface';
 Chart.register(...registerables)
 
 @Component({
-  selector: 'app-calificaciones',
-  templateUrl: './calificaciones.component.html',
-  styleUrls: ['./calificaciones.component.scss']
+  selector: 'app-dashboard-Empresa',
+  templateUrl: './dashboardEmpresa.component.html',
+  styleUrls: ['./dashboardEmpresa.component.scss']
 })
-export class CalificacionesComponent implements OnInit {
+export class DashboardEmpresaAuditorComponent implements OnInit {
 
   empleados: ListaEmpleadosI[] = [];
-  informes: ListaInformesI[] = [];
   opcion!: string;
   cedulaxx!: string | null;
+  nitEmpresa!: string | null;
+  nombreEmpresa!: string | null;
 
   constructor(private api: ApiService, private router: Router, private activeroute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.cedulaxx = this.activeroute.snapshot.paramMap.get('id');
+    this.nitEmpresa = this.activeroute.snapshot.paramMap.get('nit');
     this.renderCharts();
-    // this.api.getInformes().subscribe(data => {
-      // console.log(data)
-      // this.informes = data;
-    // })
+    this.api.getUnaEmpresa(this.nitEmpresa).subscribe(data => {
+      this.nombreEmpresa = data.nombreEm;
+    })
   }
 
   renderCharts() {
@@ -76,7 +76,11 @@ export class CalificacionesComponent implements OnInit {
     this.router.navigate(['miCuentaAuditor', this.cedulaxx]);
   }
   //Se direcciona para editar un empleado
-  actualizarInforme(id: any) {
-    this.router.navigate(['editar', id]);
+  actualizarEmpresa() {
+    this.router.navigate(['editarEmpresa', this.cedulaxx, this.nitEmpresa]);
+  }
+  //Se direcciona para editar un empleado
+  dashboardEmpresa() {
+    this.router.navigate(['dashboardEmpresaAuditor', this.cedulaxx, this.nitEmpresa]);
   }
 }

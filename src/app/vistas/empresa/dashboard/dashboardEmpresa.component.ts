@@ -20,6 +20,7 @@ export class DashboardEmpresaComponent implements OnInit {
 
   ngOnInit(): void {
     this.cedulaxx = this.activeroute.snapshot.paramMap.get('id');
+    let nitEmpresa = this.activeroute.snapshot.paramMap.get('nit');
     this.renderCharts();
   }
 
@@ -64,5 +65,13 @@ export class DashboardEmpresaComponent implements OnInit {
   //Se direcciona hacia los datos de la cuenta
   goCuenta() {
     this.router.navigate(['miCuentaEmpresa', this.cedulaxx]);
+  }
+  //Se direcciona para editar un empleado
+  actualizarEmpresa(id: any) {
+    this.router.navigate(['editarEmpresa', this.cedulaxx, id]);
+  }
+  //Se direcciona para editar un empleado
+  dashboardEmpresa(id: any) {
+    this.router.navigate(['dashboardEmpresaAuditor', this.cedulaxx, id]);
   }
 }

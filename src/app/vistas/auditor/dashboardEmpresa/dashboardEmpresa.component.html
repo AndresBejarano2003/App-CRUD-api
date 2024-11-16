@@ -4,20 +4,28 @@
         <!-- Barra de navegación lateral -->
         <div class="col-md-2 bg-dark text-white sidebar">
             <nav class="navbar navbar-dark">
-                <span class="navbar-brand mb-0 h1">Dashboard empresa</span>
+                <span class="navbar-brand mb-0 h1">Dashboard Auditor</span>
             </nav>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link text-white" (click)="goInicio()" routerLink="/dashboard"><i class="fa fa-home"></i> Inicio</a>
+                    <a class="nav-link text-white" (click)="goInicio()" routerLink="/dashboard"><i
+                            class="fa fa-home"></i> Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" (click)="goInformes()" routerLink="/informes"><i class="fa fa-chart-bar"></i> Evidencias</a>
+                    <a class="nav-link text-white" (click)="goCalificaciones()" routerLink="/calificaciones"><i
+                            class="fa fa-chart-bar"></i> Calificar informes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" (click)="goCuenta()" routerLink="/mi-cuenta"><i class="fa fa-user"></i> Mi Cuenta</a>
+                    <a class="nav-link text-white" (click)="goInformes()" routerLink="/informes"><i
+                            class="fa fa-chart-bar"></i> Usuarios empresa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" (click)="logout()" routerLink="/mi-cuenta"><i class="fa-solid fa-door-open"></i>
+                    <a class="nav-link text-white" (click)="goCuenta()" routerLink="/mi-cuenta"><i
+                            class="fa fa-user"></i> Mi Cuenta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="logout()" routerLink="/mi-cuenta"><i
+                            class="fa-solid fa-door-open"></i>
                         Cerrar sesión</a>
                 </li>
             </ul>
@@ -26,6 +34,11 @@
         <!-- Contenido principal -->
         <div class="col-md-10 offset-md-2">
             <div class="container mt-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5 class="card-title">{{nombreEmpresa}}</h5>
+                    </div>
+                </div>
                 <div class="row">
                     <!-- Tarjeta de Cumplimiento Continuo -->
                     <div class="col-md-4">
@@ -58,6 +71,8 @@
                                 <p>Auditor: John Doe</p>
                             </div>
                         </div>
+                        <a routerLink="/informes" (click)="actualizarEmpresa()" class="btn btn-primary mt-3" style="margin-right: 10px;">Editar</a>
+                        <a routerLink="/informes" (click)="goInformes()" class="btn btn-primary mt-3" style="background-color: mediumseagreen; border-color: mediumseagreen;">Volver</a>
                     </div>
                 </div>
                 <!-- Tarjetas adicionales para tareas -->

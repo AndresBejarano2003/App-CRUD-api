@@ -3,17 +3,15 @@ import { ApiService } from '../../../servicios/api/api.service';
 import { ListaEmpleadosI } from '../../../modelos/listaEmpleados.interface';
 import { Chart, registerables } from 'chart.js';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ListaEmpresasI } from 'src/app/modelos/listaEmpresas.interface';
 Chart.register(...registerables)
 
 @Component({
-  selector: 'app-informes-Auditor',
-  templateUrl: './informesAuditor.component.html',
-  styleUrls: ['./informesAuditor.component.scss']
+  selector: 'app-evidencias',
+  templateUrl: './evidencias.component.html',
+  styleUrls: ['./evidencias.component.scss']
 })
-export class InformesAuditorComponent implements OnInit {
+export class EvidenciasComponent implements OnInit {
 
-  empresas: ListaEmpresasI[] = [];
   empleados: ListaEmpleadosI[] = [];
   opcion!: string;
   cedulaxx!: string | null;
@@ -22,11 +20,33 @@ export class InformesAuditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.cedulaxx = this.activeroute.snapshot.paramMap.get('id');
-    this.api.getEmpresas().subscribe(data => {
-      console.log("data")
-      console.log(data)
-      this.empresas = data;
-    })
+    this.renderCharts();
+  }
+
+  renderCharts() {
+    var ctx1 = document.getElementById('complianceChart') as HTMLCanvasElement;
+    new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        labels: ['En Cumplimiento', 'Pendiente', 'No Cumple'],
+        datasets: [{
+          data: [60, 25, 15],
+          backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+        }]
+      }
+    });
+
+    var ctx2 = document.getElementById('isoComplianceChart') as HTMLCanvasElement;
+    new Chart(ctx2, {
+      type: 'doughnut',
+      data: {
+        labels: ['Compliant', 'Non-compliant'],
+        datasets: [{
+          data: [45, 55],
+          backgroundColor: ['#007bff', '#dc3545']
+        }]
+      }
+    });
   }
 
   //Se direcciona hacia el login
@@ -39,7 +59,7 @@ export class InformesAuditorComponent implements OnInit {
   }
   //Se direcciona hacia los informes
   goInformes() {
-    this.router.navigate(['informesAuditor', this.cedulaxx]);
+    this.router.navigate(['evidencias', this.cedulaxx]);
   }
   //Se direcciona hacia los informes
   goCalificaciones() {
@@ -50,11 +70,7 @@ export class InformesAuditorComponent implements OnInit {
     this.router.navigate(['miCuentaAuditor', this.cedulaxx]);
   }
   //Se direcciona para editar un empleado
-  actualizarEmpresa(id: any) {
-    this.router.navigate(['editarEmpresa', this.cedulaxx, id]);
-  }
-  //Se direcciona para editar un empleado
-  dashboardEmpresa(id: any) {
-    this.router.navigate(['dashboardEmpresaAuditor', this.cedulaxx, id]);
+  actualizarEmpresa(id:any){
+    this.router.navigate(['editarEmpresa', id]);
   }
 }

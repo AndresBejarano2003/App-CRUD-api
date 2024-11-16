@@ -7,6 +7,8 @@ import { EmpleadoI } from '../../modelos/empleado.interface';
 import { ControllerApiList } from 'src/app/modelos/ControllerUrl';
 import { Usuario } from 'src/app/modelos/Usuario';
 import { salesdata } from 'src/app/modelos/salesdata';
+import { ListaInformesI } from 'src/app/modelos/listaInformes.interface';
+import { ListaEmpresasI } from 'src/app/modelos/listaEmpresas.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +26,17 @@ export class ApiService {
     );
   }
 
+  getEmpresas(): Observable<ListaEmpresasI[]> {
+    return this.http.get<ListaEmpresasI[]>(`${ControllerApiList.Auditor.ListarEmpresas}`);
+  }
   getEmployees(): Observable<ListaEmpleadosI[]> {
     let direccion = this.url + 'Listado';
     console.log(direccion);
     return this.http.get<ListaEmpleadosI[]>(direccion);
+  }
+  getInformes(): Observable<ListaInformesI[]> {
+    return this.http.get<ListaInformesI[]>(
+      `${ControllerApiList.Auditor.ListarInformes}`);
   }
 
   getOneEmployee(idEmpleado: any): Observable<EmpleadoI> {
@@ -38,6 +47,27 @@ export class ApiService {
       {
         params: params,
       });
+  }
+
+  putEmpresa(form: ListaEmpresasI, nitEmpre: string): Observable<ListaEmpresasI> {
+    form.nitEmpre = nitEmpre;
+    const EMPRESA = this.http.put<ListaEmpresasI>(
+      `${ControllerApiList.Auditor.ActualizarEmpresa}`,
+      form
+    );
+    return EMPRESA;
+  }
+
+  putUsuarioEmpresa(form: Usuario, idUsuario: string): Observable<Usuario> {
+    form.cedulaxx = idUsuario;
+    console.log("form");
+    console.log(form);
+    
+    const EMPRESA = this.http.put<Usuario>(
+      `${ControllerApiList.Empresa.ActualizarUsuarioEmpresa}`,
+      form
+    );
+    return EMPRESA;
   }
 
   putEmployees(form: EmpleadoI, idEmpleado: string): Observable<ResponseI> {
@@ -54,6 +84,28 @@ export class ApiService {
     console.log(params);
     return this.http.delete(
       `${ControllerApiList.Empleado.Eliminar}`,
+      {
+        params: params,
+      });
+  }
+  
+  getUnaEmpresa(idEmpresa: any): Observable<ListaEmpresasI> {
+    let params = new HttpParams().set("idEmpresa", idEmpresa);
+    console.log(params);
+    return this.http.get<ListaEmpresasI>(
+      `${ControllerApiList.Auditor.ListarPorId}`,
+      {
+        params: params,
+      });
+  }
+
+  deleteEmpresa(idEmpresa: any): Observable<{}> {
+    console.log("idEmpresa", idEmpresa);
+    
+    let params = new HttpParams().set("idEmpresa", idEmpresa);
+    console.log(params);
+    return this.http.delete(
+      `${ControllerApiList.Auditor.Eliminar}`,
       {
         params: params,
       });

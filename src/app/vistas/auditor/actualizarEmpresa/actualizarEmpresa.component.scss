@@ -1,7 +1,15 @@
+.mensajeError {
+  color: red;
+}
+.cambioColor {
+  box-shadow: 1px 1px 4px 4px rgba(255, 0, 0, 0.486);
+  border-color: red;
+}
 .card {
   margin-bottom: 20px;
 }
-.navbar-brand, .nav-link {
+.navbar-brand,
+.nav-link {
   font-weight: bold;
 }
 .nav-link:hover {
@@ -23,7 +31,8 @@
   margin-bottom: 20px;
 }
 
-table th, table td {
+table th,
+table td {
   text-align: center;
   padding: 10px;
 }

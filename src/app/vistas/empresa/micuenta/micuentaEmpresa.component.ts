@@ -7,12 +7,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/modelos/Usuario';
 import { DatePipe } from '@angular/common';
 
+
 Chart.register(...registerables)
 
 @Component({
   selector: 'app-micuenta-Empresa',
   templateUrl: './micuentaEmpresa.component.html',
-  styleUrls: ['./micuentaEmpresa.component.scss']
+  styleUrls: ['./micuentaEmpresa.component.scss'],
+  providers: [DatePipe]
 })
 export class MiCuentaEmpresaComponent implements OnInit {
 
@@ -94,11 +96,11 @@ export class MiCuentaEmpresaComponent implements OnInit {
       let mFecha = mMatriz[0].split("/");
       console.log("mFecha");
       console.log(mFecha);
-      if(mFecha[0] < 10){
+      if (mFecha[0] < 10) {
         mFecha[0] = "0" + mFecha[0];
       }
       console.log(mFecha[2] + "-" + mFecha[1] + "-" + mFecha[0]);
-      
+
       this.datosUsuario.fecNacim = mFecha[2] + "-" + mFecha[1] + "-" + mFecha[0];
       this.datosForm.setValue({
         'cedulaxx': this.datosUsuario.cedulaxx,
@@ -151,27 +153,48 @@ export class MiCuentaEmpresaComponent implements OnInit {
   }
 
   postForm(form: any) {
-    // 
-    // if(this.used == true){
-    //   console.log("El id YA está usado");
-    //   this.mensaje="El id ingresado está en uso, digite otro";
-    //   this.activarDanger=true;
-    //   this.activarSuccess=false;
-    // }else{
-    //   this.api.postEmployees(form).subscribe(data =>{
-    //     console.log("Nuevo empleado:")
-    //     console.log(data)
-    //     this.mensaje="Se ha creado un nuevo usuario"      
-    //     this.crearForm.reset();
-    //     this.activarSuccess=true;
-    //     this.activarDanger=false;
-    //   }, rest =>{      
-    //     this.mensaje = "Error ";
-    //     this.activarDanger=true;
-    //     this.activarSuccess=false;
-    //   })
-    //         
-    // }  
+
+    let fechcrea = form.fechcrea.split(" ");
+      console.log(fechcrea);
+      let mFechcrea = fechcrea[0].split("/");
+      console.log("mFechcrea");
+      console.log(mFechcrea);
+      if (mFechcrea[0] < 10) {
+        mFechcrea[0] = "0" + mFechcrea[0];
+      }
+      console.log(mFechcrea[2] + "-" + mFechcrea[1] + "-" + mFechcrea[0]);
+
+      form.fechcrea = mFechcrea[2] + "-" + mFechcrea[1] + "-" + mFechcrea[0];
+
+      let fechmodi = form.fechmodi.split(" ");
+      console.log(fechmodi);
+      let mFechmodi = fechmodi[0].split("/");
+      console.log("mFechmodi");
+      console.log(mFechmodi);
+      if (mFechmodi[0] < 10) {
+        mFechmodi[0] = "0" + mFechmodi[0];
+      }
+      console.log(mFechmodi[2] + "-" + mFechmodi[1] + "-" + mFechmodi[0]);
+
+      form.fechmodi = mFechmodi[2] + "-" + mFechmodi[1] + "-" + mFechmodi[0];
+
+
+    this.api.putUsuarioEmpresa(form,form.cedulaxx).subscribe(data => {
+      console.log("Actualizar empresa:")
+      console.log(data)
+      this.getDataUser(this.cedulaxx);
+      this.mensaje = "Se ha actualizado el usuario";
+      this.datosForm.reset();
+      this.activarSuccess = true;
+      this.activarDanger = false;
+    }, rest => {
+      alert(rest);
+      console.log(rest);
+      
+      this.mensaje = "Error ";
+      this.activarDanger = true;
+      this.activarSuccess = false;
+    })
     console.log("Se termina de ejecutar el metodo postForm");
   }
 

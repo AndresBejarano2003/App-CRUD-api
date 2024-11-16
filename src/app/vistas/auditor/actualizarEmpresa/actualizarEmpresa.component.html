@@ -1,0 +1,120 @@
+<!-- dashboard.component.html -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Barra de navegación lateral -->
+        <div class="col-md-2 bg-dark text-white sidebar">
+            <nav class="navbar navbar-dark">
+                <span class="navbar-brand mb-0 h1">Dashboard Auditor</span>
+            </nav>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goInicio()" routerLink="/dashboard"><i
+                            class="fa fa-home"></i> Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goCalificaciones()" routerLink="/calificaciones"><i
+                            class="fa fa-chart-bar"></i> Calificar informes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goInformes()" routerLink="/informes"><i
+                            class="fa fa-chart-bar"></i> Usuarios empresa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="goCuenta()" routerLink="/mi-cuenta"><i
+                            class="fa fa-user"></i> Mi Cuenta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="logout()" routerLink="/mi-cuenta"><i
+                            class="fa-solid fa-door-open"></i>
+                        Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-10 offset-md-2">
+
+
+            <div class="container">
+
+                <h1>EDITAR EMPRESA</h1>
+                <hr>
+
+                <form [formGroup]="datosForm" (ngSubmit)="putEmpresa(datosForm.value)">
+
+                    <div class="form-group">
+                        <label for="nitEmpre">Nit empresa</label>
+                        <input #nitEmpre type="text" id="nitEmpre" class="form-control" placeholder="Nit empresa"
+                            formControlName="nitEmpre" readonly
+                            [ngClass]="{cambioColor : datosForm.controls['nitEmpre'].dirty && datosForm.controls['nitEmpre'].hasError('required') || datosForm.controls['nitEmpre'].hasError('pattern')}">
+                        <div *ngIf="datosForm.controls['nitEmpre'].dirty">
+                            <label class="mensajeError"
+                                *ngIf="datosForm.controls['nitEmpre'].hasError('required')">*Campo
+                                requerido</label>
+                            <label class="mensajeError" *ngIf="datosForm.controls['nitEmpre'].hasError('pattern')">*Solo
+                                ingrese numeros en este campo</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreEm">Nombre empresa</label>
+                        <input type="text" class="form-control" placeholder="Nombre empresa" formControlName="nombreEm"
+                            [ngClass]="{cambioColor : datosForm.controls['nombreEm'].dirty && datosForm.controls['nombreEm'].hasError('required') || datosForm.controls['nombreEm'].hasError('pattern')}">
+                        <div *ngIf="datosForm.controls['nombreEm'].dirty">
+                            <label class="mensajeError"
+                                *ngIf="datosForm.controls['nombreEm'].hasError('required')">*Campo
+                                requerido</label>
+                            <label class="mensajeError" *ngIf="datosForm.controls['nombreEm'].hasError('pattern')">*Solo
+                                ingrese letras en este campo sin caracteres especiales</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="direccio">Dirección empresa</label>
+                        <input type="text" class="form-control" placeholder="Dirección empresa"
+                            formControlName="direccio"
+                            [ngClass]="{cambioColor : datosForm.controls['direccio'].dirty && datosForm.controls['direccio'].hasError('required') || datosForm.controls['direccio'].hasError('pattern')}">
+                        <div *ngIf="datosForm.controls['direccio'].dirty">
+                            <label class="mensajeError"
+                                *ngIf="datosForm.controls['direccio'].hasError('required')">*Campo requerido</label>
+                            <label class="mensajeError" *ngIf="datosForm.controls['direccio'].hasError('pattern')">*Solo
+                                ingrese letras en este campo sin caracteres especiales</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono empresa</label>
+                        <input type="text" class="form-control" placeholder="Teléfono empresa"
+                            formControlName="telefono"
+                            [ngClass]="{cambioColor : datosForm.controls['telefono'].dirty && datosForm.controls['telefono'].hasError('required') || datosForm.controls['telefono'].hasError('pattern')}">
+                        <div *ngIf="datosForm.controls['telefono'].dirty">
+                            <label class="mensajeError"
+                                *ngIf="datosForm.controls['telefono'].hasError('required')">*Campo requerido</label>
+                            <label class="mensajeError" *ngIf="datosForm.controls['telefono'].hasError('pattern')">*Solo
+                                ingrese letras en este campo sin caracteres especiales</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="licencia">Licencia</label><br>
+                        <select formControlName="licencia">
+                            <option value=""> SELECCIONE</option>
+                            <option value="INACTIVA">INACTIVA</option>
+                            <option value="ACTIVA">ACTIVA</option>
+                        </select>
+                    </div><br>
+                    <div style="width: 235px;">
+                        <button type="button" class="btn btn-primary" (click)="dashboardEmpresa()"
+                            style="background-color: mediumseagreen; border-color: mediumseagreen; float: left; border-radius: 20px;">Volver</button>
+                        <button type="submit" style="border-radius: 20px;" *ngIf="desactivarBotones==false"
+                             class="btn btn-primary" float="left">Guardar</button>
+                        <button type="button" class="btn btn-primary" *ngIf="desactivarBotones==false"
+                            (click)="eliminar(nitEmpre.value)"
+                            style="background-color: red; border-color: red; float: inline-end; border-radius: 20px;">Eliminar</button>
+                    </div>
+                </form><br>
+                <div *ngIf="desactivarBotones==true"><br><br></div>
+                <div *ngIf="activarSuccess==true">
+                    <app-mensaje-success [mensaje]="mensaje"></app-mensaje-success>
+                </div>
+                <div *ngIf="activarDanger==true">
+                    <app-mensaje-danger [mensaje]="mensaje"></app-mensaje-danger>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -11,6 +11,9 @@ import { MiCuentaEmpresaComponent } from './vistas/empresa/micuenta/micuentaEmpr
 import { InformesAuditorComponent } from './vistas/auditor/informes/informesAuditor.component';
 import { MiCuentaAuditorComponent } from './vistas/auditor/micuenta/micuentaAuditor.component';
 import { CalificacionesComponent } from './vistas/auditor/calificaciones/calificaciones.component';
+import { ActualizarEmpresaComponent } from './vistas/auditor/actualizarEmpresa/actualizarEmpresa.component';
+import { EvidenciasComponent } from './vistas/auditor/evidencias/evidencias.component';
+import { DashboardEmpresaAuditorComponent } from './vistas/auditor/dashboardEmpresa/dashboardEmpresa.component';
 
 
 const routes: Routes = [
@@ -29,6 +32,9 @@ const routes: Routes = [
   { path: 'informesAuditor/:id', component: InformesAuditorComponent },
   { path: 'miCuentaAuditor/:id', component: MiCuentaAuditorComponent },
   { path: 'calificaciones/:id', component: CalificacionesComponent },
+  { path: 'editarEmpresa/:id/:nit', component: ActualizarEmpresaComponent },
+  { path: 'evidencias/:id', component: EvidenciasComponent },
+  { path: 'dashboardEmpresaAuditor/:id/:nit', component: DashboardEmpresaAuditorComponent },
   //{ path: 'assessment', component: AssessmentComponent },  // Asegúrate de tener este componente creado
   //{ path: 'account', component: AccountComponent },  // Asegúrate de tener este componente creado
 ];
@@ -39,4 +45,19 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [LoginComponent, DashboardComponent, EditarComponent, NuevoComponent, DashboardAuditorComponent, DashboardEmpresaComponent, InformesEmpresaComponent, MiCuentaEmpresaComponent, DashboardAuditorComponent, InformesAuditorComponent, MiCuentaAuditorComponent]
+export const routingComponents = [
+  LoginComponent, 
+  DashboardComponent, 
+  EditarComponent, 
+  NuevoComponent,
+  DashboardAuditorComponent, 
+  DashboardEmpresaComponent, 
+  InformesEmpresaComponent, 
+  MiCuentaEmpresaComponent, 
+  DashboardAuditorComponent, 
+  InformesAuditorComponent, 
+  MiCuentaAuditorComponent,
+  CalificacionesComponent,
+  ActualizarEmpresaComponent,
+  EvidenciasComponent,
+]
