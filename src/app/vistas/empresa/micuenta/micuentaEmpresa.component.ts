@@ -20,6 +20,10 @@ export class MiCuentaEmpresaComponent implements OnInit {
 
   empleados: ListaEmpleadosI[] = [];
   opcion!: string;
+  cedulaxx!: string | null;
+  nitEmpresa!: string | null;
+  nombreEmpresa!: string | null;
+  dateFinish!: string | undefined;
   fecNacim!: string;
   activarSuccess: boolean = false;
   activarDanger: boolean = false;
@@ -50,6 +54,7 @@ export class MiCuentaEmpresaComponent implements OnInit {
       usermodi: "",
       fechmodi: new Date(),
       horamodi: "",
+      idEmpres: "",
     }
   );
 
@@ -78,13 +83,17 @@ export class MiCuentaEmpresaComponent implements OnInit {
     fechmodi: new FormControl(new Date()),
     horamodi: new FormControl(""),
   });
-  cedulaxx!: string | null;
 
   constructor(private api: ApiService, private router: Router, private activeroute: ActivatedRoute, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.cedulaxx = this.activeroute.snapshot.paramMap.get('id');
+    this.nitEmpresa = this.activeroute.snapshot.paramMap.get('nit');
     this.getDataUser(this.cedulaxx);
+
+    this.api.getUnaEmpresa(this.nitEmpresa).subscribe(data => {
+      this.nombreEmpresa = data.nombreEm;
+    })
   }
 
   getDataUser(idUser: any) {
@@ -141,45 +150,45 @@ export class MiCuentaEmpresaComponent implements OnInit {
   }
   //Se direcciona hacia el dashboard
   goInicio() {
-    this.router.navigate(['dashboardEmpresa', this.cedulaxx]);
+    this.router.navigate(['dashboardEmpresa', this.cedulaxx, this.nitEmpresa]);
   }
   //Se direcciona hacia los informes
   goInformes() {
-    this.router.navigate(['informesEmpresa', this.cedulaxx]);
+    this.router.navigate(['informesEmpresa', this.cedulaxx, this.nitEmpresa]);
   }
   //Se direcciona hacia los datos de la cuenta
   goCuenta() {
-    this.router.navigate(['miCuentaEmpresa', this.cedulaxx]);
+    this.router.navigate(['miCuentaEmpresa', this.cedulaxx, this.nitEmpresa]);
   }
 
   postForm(form: any) {
 
     let fechcrea = form.fechcrea.split(" ");
-      console.log(fechcrea);
-      let mFechcrea = fechcrea[0].split("/");
-      console.log("mFechcrea");
-      console.log(mFechcrea);
-      if (mFechcrea[0] < 10) {
-        mFechcrea[0] = "0" + mFechcrea[0];
-      }
-      console.log(mFechcrea[2] + "-" + mFechcrea[1] + "-" + mFechcrea[0]);
+    console.log(fechcrea);
+    let mFechcrea = fechcrea[0].split("/");
+    console.log("mFechcrea");
+    console.log(mFechcrea);
+    if (mFechcrea[0] < 10) {
+      mFechcrea[0] = "0" + mFechcrea[0];
+    }
+    console.log(mFechcrea[2] + "-" + mFechcrea[1] + "-" + mFechcrea[0]);
 
-      form.fechcrea = mFechcrea[2] + "-" + mFechcrea[1] + "-" + mFechcrea[0];
+    form.fechcrea = mFechcrea[2] + "-" + mFechcrea[1] + "-" + mFechcrea[0];
 
-      let fechmodi = form.fechmodi.split(" ");
-      console.log(fechmodi);
-      let mFechmodi = fechmodi[0].split("/");
-      console.log("mFechmodi");
-      console.log(mFechmodi);
-      if (mFechmodi[0] < 10) {
-        mFechmodi[0] = "0" + mFechmodi[0];
-      }
-      console.log(mFechmodi[2] + "-" + mFechmodi[1] + "-" + mFechmodi[0]);
+    let fechmodi = form.fechmodi.split(" ");
+    console.log(fechmodi);
+    let mFechmodi = fechmodi[0].split("/");
+    console.log("mFechmodi");
+    console.log(mFechmodi);
+    if (mFechmodi[0] < 10) {
+      mFechmodi[0] = "0" + mFechmodi[0];
+    }
+    console.log(mFechmodi[2] + "-" + mFechmodi[1] + "-" + mFechmodi[0]);
 
-      form.fechmodi = mFechmodi[2] + "-" + mFechmodi[1] + "-" + mFechmodi[0];
+    form.fechmodi = mFechmodi[2] + "-" + mFechmodi[1] + "-" + mFechmodi[0];
 
 
-    this.api.putUsuarioEmpresa(form,form.cedulaxx).subscribe(data => {
+    this.api.putUsuarioEmpresa(form, form.cedulaxx).subscribe(data => {
       console.log("Actualizar empresa:")
       console.log(data)
       this.getDataUser(this.cedulaxx);
@@ -190,7 +199,7 @@ export class MiCuentaEmpresaComponent implements OnInit {
     }, rest => {
       alert(rest);
       console.log(rest);
-      
+
       this.mensaje = "Error ";
       this.activarDanger = true;
       this.activarSuccess = false;

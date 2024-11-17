@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ResponseI } from '../../modelos/response.interface';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, observable } from 'rxjs';
+import { Observable, observable, of } from 'rxjs';
 import { ListaEmpleadosI } from '../../modelos/listaEmpleados.interface'
 import { EmpleadoI } from '../../modelos/empleado.interface';
 import { ControllerApiList } from 'src/app/modelos/ControllerUrl';
@@ -9,6 +9,7 @@ import { Usuario } from 'src/app/modelos/Usuario';
 import { salesdata } from 'src/app/modelos/salesdata';
 import { ListaInformesI } from 'src/app/modelos/listaInformes.interface';
 import { ListaEmpresasI } from 'src/app/modelos/listaEmpresas.interface';
+import { informesI } from 'src/app/modelos/informes.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +71,18 @@ export class ApiService {
     return EMPRESA;
   }
 
+  putEstadoInforme(informe: informesI, idInform: any): Observable<Usuario> {
+    informe.idInform = idInform;
+    console.log("informe");
+    console.log(informe);
+    
+    const EMPRESA = this.http.put<Usuario>(
+      `${ControllerApiList.Auditor.ActualizarInforme}`,
+      informe
+    );
+    return EMPRESA;
+  }
+
   putEmployees(form: EmpleadoI, idEmpleado: string): Observable<ResponseI> {
     form.id = idEmpleado;
     const empleado = this.http.put<EmpleadoI>(
@@ -94,6 +107,25 @@ export class ApiService {
     console.log(params);
     return this.http.get<ListaEmpresasI>(
       `${ControllerApiList.Auditor.ListarPorId}`,
+      {
+        params: params,
+      });
+  }
+  getInformesAuditor(nitEmpre: any): Observable<informesI[]> {
+    let params = new HttpParams().set("nitEmpre", nitEmpre);
+    console.log(params);
+    return this.http.get<informesI[]>(
+      `${ControllerApiList.Auditor.DataInforme}`,
+      {
+        params: params,
+      });
+  }
+  
+  getUnInformesAuditor(nitEmpre: any,idInform:any): Observable<informesI> {
+    let params = new HttpParams().set("idInform", idInform).set("nitEmpre", nitEmpre);
+    console.log(params);
+    return this.http.get<informesI>(
+      `${ControllerApiList.Auditor.DataUnInforme}`,
       {
         params: params,
       });
@@ -133,6 +165,25 @@ export class ApiService {
 
   loadsalesdata(){
     return this.http.get<salesdata[]>("http://localhost:3000/sales")
+  }
+
+  // Simulación de datos de la base de datos
+  private requisitos = [
+    {
+      tema: 'Requisito 1',
+      estado: '',
+      pregunta: 'Describa cómo se cumple este requisito.',
+    },
+    {
+      tema: 'Requisito 2',
+      estado: '',
+      pregunta: 'Proporcione evidencia del cumplimiento.',
+    },
+  ];
+
+  // Método para obtener los datos simulados
+  getRequisitos(): Observable<any[]> {
+    return of(this.requisitos); // Simula una llamada a la base de datos
   }
 
 }

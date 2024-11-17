@@ -24,9 +24,9 @@ const routes: Routes = [
   { path: 'nuevo', component: NuevoComponent },
   { path: 'editar/:id', component: EditarComponent },
   //MÓDULOS DE LA EMPRESA
-  { path: 'dashboardEmpresa/:id', component: DashboardEmpresaComponent },
-  { path: 'informesEmpresa/:id', component: InformesEmpresaComponent },
-  { path: 'miCuentaEmpresa/:id', component: MiCuentaEmpresaComponent },
+  { path: 'dashboardEmpresa/:id/:nit', component: DashboardEmpresaComponent },
+  { path: 'informesEmpresa/:id/:nit', component: InformesEmpresaComponent },
+  { path: 'miCuentaEmpresa/:id/:nit', component: MiCuentaEmpresaComponent },
   //MÓDULOS DE LA AUDITOR
   { path: 'dashboardAuditor/:id', component: DashboardAuditorComponent },
   { path: 'informesAuditor/:id', component: InformesAuditorComponent },

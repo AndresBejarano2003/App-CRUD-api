@@ -13,6 +13,7 @@ import { EdadPipe } from './pipes/edad.pipe';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { DashboardEmpresaAuditorComponent } from './vistas/auditor/dashboardEmpresa/dashboardEmpresa.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DatePipe } from '@angular/common';
     routingComponents,
     MensajeDangerComponent,
     MensajeSuccessComponent,
+    DashboardEmpresaAuditorComponent,
     EdadPipe
   ],
   imports: [

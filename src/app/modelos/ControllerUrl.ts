@@ -17,5 +17,8 @@ export const ControllerApiList = {
         ListarPorId: "https://localhost:7106/usuarioAuditor/Consulta",
         Eliminar: "https://localhost:7106/usuarioAuditor/Eliminar",
         ActualizarEmpresa: "https://localhost:7106/usuarioAuditor/ActualizarEmpresa",
+        DataInforme: "https://localhost:7106/usuarioAuditor/dataInforme",
+        ActualizarInforme: "https://localhost:7106/usuarioAuditor/ActualizarInforme",
+        DataUnInforme: "https://localhost:7106/usuarioAuditor/dataUnInforme",
     }
 }

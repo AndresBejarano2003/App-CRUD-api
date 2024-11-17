@@ -1,4 +1,4 @@
-export interface ListaInformesI {
+export interface informesI {
     idInform: string;
     temaxxxx: string;
     requisit: string;
@@ -11,5 +11,4 @@ export interface ListaInformesI {
     regestxx: string;
     aplicaxx: string;
     tipoxxxx: string;
-
 }

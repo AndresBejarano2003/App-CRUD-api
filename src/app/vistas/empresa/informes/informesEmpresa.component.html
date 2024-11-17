@@ -4,7 +4,7 @@
         <!-- Barra de navegación lateral -->
         <div class="col-md-2 bg-dark text-white sidebar">
             <nav class="navbar navbar-dark">
-                <span class="navbar-brand mb-0 h1">Dashboard empresa</span>
+                <span class="navbar-brand mb-0 h2">Dashboard <br><strong>{{nombreEmpresa}}</strong></span>
             </nav>
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -47,10 +47,14 @@
                     <div class="tab-pane fade show active" id="requisitos" role="tabpanel"
                         aria-labelledby="requisitos-tab">
                         <div class="d-flex align-items-center mt-3">
-                            <span class="mr-2">Porcentaje de cumplimiento:</span>
+                            <span class="mr-2">Porcentaje de cumplimiento: </span>
                             <div class="progress flex-grow-1">
                                 <div id="requisitos-progress-p1" class="progress-bar" role="progressbar"
-                                    style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                    [ngStyle]="{ width: cumplimientoRequisitos + '%' }"
+                                    [attr.aria-valuenow]="cumplimientoRequisitos" aria-valuemin="0" aria-valuemax="100"
+                                    [ngClass]="getProgressBarClass(cumplimientoRequisitos)">
+                                    {{ cumplimientoRequisitos | number: '1.0-0' }}%
+                                </div>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -64,20 +68,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Requisito 1</td>
-                                        <td><span class="badge badge-success">En Cumplimiento</span>
+                                    <tr *ngFor="let informe of informes">
+                                        <td>{{informe.temaxxxx}}</td>
+                                        <td style="width: 200px;">
+                                            <span [ngClass]="{
+                                                'badge badge-warning': informe?.regestxx === 'Pendiente',
+                                                'badge badge-success': informe?.regestxx === 'En Cumplimiento',
+                                                'badge badge-danger': informe?.regestxx === 'No Cumple'
+                                              }">{{ informe?.regestxx }}</span>
                                         </td>
                                         <td><button class="btn btn-primary btn-sm"><i class="fas fa-upload"></i>
                                                 Subir</button></td>
-                                        <td>Describa cómo se cumple este requisito.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Requisito 2</td>
-                                        <td><span class="badge badge-warning">Pendiente</span></td>
-                                        <td><button class="btn btn-primary btn-sm"><i class="fas fa-upload"></i>
-                                                Subir</button></td>
-                                        <td>Proporcione evidencia del cumplimiento.</td>
+                                        <td>{{informe.requisit}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -87,10 +89,14 @@
                     <!-- Sección de Controles del Anexo A -->
                     <div class="tab-pane fade" id="controles" role="tabpanel" aria-labelledby="controles-tab">
                         <div class="d-flex align-items-center mt-3">
-                            <span class="mr-2">Porcentaje de cumplimiento:</span>
+                            <span class="mr-2">Porcentaje de cumplimiento: </span>
                             <div class="progress flex-grow-1">
                                 <div id="requisitos-progress-p2" class="progress-bar" role="progressbar"
-                                    style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                    [ngStyle]="{ width: cumplimientoControles + '%' }"
+                                    [attr.aria-valuenow]="cumplimientoControles" aria-valuemin="0" aria-valuemax="100"
+                                    [ngClass]="getProgressBarClass(cumplimientoControles)">
+                                    {{ cumplimientoControles | number: '1.0-0' }}%
+                                </div>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -105,10 +111,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Control A.5</td>
-                                        <td><span class="badge badge-danger">No Cumple</span></td>
-                                        <td>
+                                    <tr *ngFor="let controles of controlesTabla">
+                                        <td>{{controles.temaxxxx}}</td>
+                                        <td style="width: 180px;">
+                                            <span [ngClass]="{
+                                                'badge badge-warning': controles?.regestxx === 'Pendiente',
+                                                'badge badge-success': controles?.regestxx === 'En Cumplimiento',
+                                                'badge badge-danger': controles?.regestxx === 'No Cumple'
+                                              }">{{ controles?.regestxx }}</span>
+                                        </td>
+                                        <td style="width: 100px;">
                                             <select class="form-control">
                                                 <option value="si">Sí</option>
                                                 <option value="no">No</option>
@@ -116,34 +128,7 @@
                                         </td>
                                         <td><button class="btn btn-primary btn-sm"><i class="fas fa-upload"></i>
                                                 Subir</button></td>
-                                        <td>¿Se han implementado las medidas necesarias?</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Control A.6</td>
-                                        <td><span class="badge badge-warning">Pendiente</span></td>
-                                        <td>
-                                            <select class="form-control">
-                                                <option value="si">Sí</option>
-                                                <option value="no">No</option>
-                                            </select>
-                                        </td>
-                                        <td><button class="btn btn-primary btn-sm"><i class="fas fa-upload"></i>
-                                                Subir</button></td>
-                                        <td>¿Existe un plan de acción para este control?</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Control A.8</td>
-                                        <td><span class="badge badge-success">En Cumplimiento</span>
-                                        </td>
-                                        <td>
-                                            <select class="form-control">
-                                                <option value="si">Sí</option>
-                                                <option value="no">No</option>
-                                            </select>
-                                        </td>
-                                        <td><button class="btn btn-primary btn-sm"><i class="fas fa-upload"></i>
-                                                Subir</button></td>
-                                        <td>Proporcione documentación que respalde este control.</td>
+                                        <td>{{controles.requisit}}</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -11,10 +11,7 @@
                     <a class="nav-link text-white" (click)="goInicio()" routerLink="/dashboard"><i
                             class="fa fa-home"></i> Inicio</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" (click)="goCalificaciones()" routerLink="/calificaciones"><i
-                            class="fa fa-chart-bar"></i> Calificar informes</a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link text-white" (click)="goInformes()" routerLink="/informes"><i
                             class="fa fa-chart-bar"></i> Usuarios empresa</a>
@@ -162,8 +159,8 @@
                                             <div class="text-right">
                                                 <button type="button" id="submit" name="submit"
                                                     class="btn btn-secondary btn-spacing">Cancelar</button>
-                                                <button type="button" id="submit" name="submit" class="btn btn-primary"
-                                                    [disabled]="datosForm.invalid">Actualizar</button>
+                                                <button type="submit" id="submit" name="submit"
+                                                    class="btn btn-primary">Actualizar</button>
                                             </div>
                                         </div>
                                     </div>

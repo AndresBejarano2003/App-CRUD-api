@@ -21,4 +21,5 @@ export interface Usuario{
     usermodi: string;
     fechmodi: any,
     horamodi: string;
+    idEmpres: string;
 }
