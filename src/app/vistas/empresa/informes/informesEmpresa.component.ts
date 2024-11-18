@@ -3,6 +3,7 @@ import { ApiService } from '../../../servicios/api/api.service';
 import { ListaEmpleadosI } from '../../../modelos/listaEmpleados.interface';
 import { Chart, registerables } from 'chart.js';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 Chart.register(...registerables)
 
 @Component({
@@ -31,9 +32,51 @@ export class InformesEmpresaComponent implements OnInit {
   constructor(private api: ApiService, private router: Router, private activeroute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    alert("Para una evaluación efectiva, se requerirá la siguiente información y documentación de su empresa: \n1. Políticas y Procedimientos: - Políticas de seguridad de la información. - Procedimientos de gestión de incidentes. - Procedimientos de control de acceso. \n2. Organigrama y Roles: - Estructura organizacional. - Descripciones de puestos y responsabilidades en seguridad de la información. \n3. Inventario de Activos: - Lista detallada de activos de información (hardware, software, datos, personas). - Valoración de activos y clasificación de información. \n4. Arquitectura de Red y Sistemas: - Diagramas de red actualizados. - Configuraciones de servidores y dispositivos de red. \n5. Historial de Incidentes: - Registros de incidentes de seguridad y acciones correctivas tomadas. - Informes de auditorías previas y evaluaciones de riesgo. \n6. Controles y Medidas de Seguridad: - Detalles sobre autenticación, autorizaciones y gestión de identidades. - Políticas de backup y recuperación ante desastres. - Controles físicos y ambientales en el centro de datos. \nAl ingresar, está aceptando los requerimientos para la evaluación eficaz de su SGSI.");
     this.cedulaxx = this.activeroute.snapshot.paramMap.get('id');
     this.nitEmpresa = this.activeroute.snapshot.paramMap.get('nit');
+    // alert("Para una evaluación efectiva, se requerirá la siguiente información y documentación de su empresa: \n1. Políticas y Procedimientos: - Políticas de seguridad de la información. - Procedimientos de gestión de incidentes. - Procedimientos de control de acceso. \n2. Organigrama y Roles: - Estructura organizacional. - Descripciones de puestos y responsabilidades en seguridad de la información. \n3. Inventario de Activos: - Lista detallada de activos de información (hardware, software, datos, personas). - Valoración de activos y clasificación de información. \n4. Arquitectura de Red y Sistemas: - Diagramas de red actualizados. - Configuraciones de servidores y dispositivos de red. \n5. Historial de Incidentes: - Registros de incidentes de seguridad y acciones correctivas tomadas. - Informes de auditorías previas y evaluaciones de riesgo. \n6. Controles y Medidas de Seguridad: - Detalles sobre autenticación, autorizaciones y gestión de identidades. - Políticas de backup y recuperación ante desastres. - Controles físicos y ambientales en el centro de datos. \nAl ingresar, está aceptando los requerimientos para la evaluación eficaz de su SGSI.");
+    Swal.fire({
+      title: '¿Estás seguro?',
+      html: `<div class="justified-text">
+          Para una evaluación efectiva, se requerirá la siguiente información y documentación de su empresa:<br><br>
+          1. <strong>Políticas y Procedimientos:</strong><br>
+          - Políticas de seguridad de la información.<br>
+          - Procedimientos de gestión de incidentes.<br>
+          - Procedimientos de control de acceso.<br><br>
+          2. <strong>Organigrama y Roles:</strong><br>
+          - Estructura organizacional.<br>
+          - Descripciones de puestos y responsabilidades en seguridad de la información.<br><br>
+          3. <strong>Inventario de Activos:</strong><br>
+          - Lista detallada de activos de información (hardware, software, datos, personas).<br>
+          - Valoración de activos y clasificación de información.<br><br>
+          4. <strong>Arquitectura de Red y Sistemas:</strong><br>
+          - Diagramas de red actualizados.<br>
+          - Configuraciones de servidores y dispositivos de red.<br><br>
+          5. <strong>Historial de Incidentes:</strong><br>
+          - Registros de incidentes de seguridad y acciones correctivas tomadas.<br>
+          - Informes de auditorías previas y evaluaciones de riesgo.<br><br>
+          6. <strong>Controles y Medidas de Seguridad:</strong><br>
+          - Detalles sobre autenticación, autorizaciones y gestión de identidades.<br>
+          - Políticas de backup y recuperación ante desastres.<br>
+          - Controles físicos y ambientales en el centro de datos.<br><br>
+          Al ingresar, está aceptando los requerimientos para la evaluación eficaz de su SGSI.
+        </div>`,
+      customClass: {
+        htmlContainer: 'text-justify',
+        popup: 'small-swal' // Clase personalizada
+      },
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, continuar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // El usuario confirmó
+        console.log('Acción confirmada');
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.goInicio()
+      }
+    });
 
     this.api.getUnaEmpresa(this.nitEmpresa).subscribe(data => {
       this.nombreEmpresa = data.nombreEm;
@@ -135,20 +178,52 @@ export class InformesEmpresaComponent implements OnInit {
     return dateObjects.reduce((max, current) => (current > max ? current : max));
   }
 
+  onFileSelected(event: Event): void {
+    alert("Se subió el archivo de manera satisfactoria")
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      console.log('Archivo seleccionado:', file);
+
+      // Aquí puedes procesar el archivo, por ejemplo, subirlo a tu API
+      this.uploadFile(file);
+    }
+  }
+
+  uploadFile(file: File): void {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    console.log("formData");
+    console.log(formData);
+    
+     this.api.uploadFile(formData).subscribe(
+       response => {
+         console.log('Archivo subido correctamente:', response);
+         // alert('Archivo subido y guardado con éxito');
+       },
+       error => {
+         console.error('Error al subir el archivo:', error);
+         //alert('Hubo un problema al subir el archivo');
+       }
+     );
+  }
+
+
   //Se direcciona hacia el login
   logout() {
     this.router.navigate(['login']);
   }
   //Se direcciona hacia el dashboard
   goInicio() {
-    this.router.navigate(['dashboardEmpresa', this.cedulaxx,this.nitEmpresa]);
+    this.router.navigate(['dashboardEmpresa', this.cedulaxx, this.nitEmpresa]);
   }
   //Se direcciona hacia los informes
   goInformes() {
-    this.router.navigate(['informesEmpresa', this.cedulaxx,this.nitEmpresa]);
+    this.router.navigate(['informesEmpresa', this.cedulaxx, this.nitEmpresa]);
   }
   //Se direcciona hacia los datos de la cuenta
   goCuenta() {
-    this.router.navigate(['miCuentaEmpresa', this.cedulaxx,this.nitEmpresa]);
+    this.router.navigate(['miCuentaEmpresa', this.cedulaxx, this.nitEmpresa]);
   }
 }

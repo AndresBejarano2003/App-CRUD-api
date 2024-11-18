@@ -10,6 +10,7 @@ export const ControllerApiList = {
     },
     Empresa:{
         ActualizarUsuarioEmpresa: "https://localhost:7106/usuarioEmpresa/Actualizar",
+        UploadArchivo: "https://localhost:7106/usuarioEmpresa/upload",
     },
     Auditor:{
         ListarInformes: "https://localhost:7106/usuarioAuditor/Listado",

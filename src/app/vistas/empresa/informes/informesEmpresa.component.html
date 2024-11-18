@@ -126,8 +126,12 @@
                                                 <option value="no">No</option>
                                             </select>
                                         </td>
-                                        <td><button class="btn btn-primary btn-sm"><i class="fas fa-upload"></i>
-                                                Subir</button></td>
+                                        <td><button class="btn btn-primary btn-sm" (click)="fileInput.click()">
+                                                <i class="fas fa-upload"></i> Subir
+                                            </button>
+                                            <input #fileInput type="file" (change)="onFileSelected($event)"
+                                                style="display: none;" />
+                                        </td>
                                         <td>{{controles.requisit}}</td>
                                     </tr>
                                 </tbody>

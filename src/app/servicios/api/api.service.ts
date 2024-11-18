@@ -111,6 +111,18 @@ export class ApiService {
         params: params,
       });
   }
+
+  uploadFile(formData: FormData): Observable<any> {
+    //const url = 'http://localhost:5000/api/upload'; // URL de tu API
+    //return this.http.post(url, formData);
+    const ARCHIVO = this.http.put<ListaInformesI>(
+      `${ControllerApiList.Empresa.UploadArchivo}`,
+      formData
+    );
+    return ARCHIVO;
+  }
+  
+
   getInformesAuditor(nitEmpre: any): Observable<informesI[]> {
     let params = new HttpParams().set("nitEmpre", nitEmpre);
     console.log(params);

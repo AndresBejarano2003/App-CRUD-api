@@ -14,3 +14,29 @@
   height: 100vh;
   position: fixed;
 }
+
+.small-swal {
+  width: 300px !important; /* Ajusta el tamaño deseado */
+  padding: 20px !important; /* Opcional: ajusta el padding */
+  font-size: 14px !important; /* Ajusta el tamaño de fuente */
+}
+
+.small-swal .swal2-title {
+  font-size: 18px !important; /* Tamaño del título */
+}
+
+.small-swal .swal2-content {
+  font-size: 14px !important; /* Tamaño del texto del contenido */
+}
+
+.small-swal .swal2-actions {
+  justify-content: center; /* Centrar los botones */
+}
+
+.justified-text {
+  text-align: justify;
+}
+
+.swal2-html-container.text-justify {
+  text-align: justify;
+}
