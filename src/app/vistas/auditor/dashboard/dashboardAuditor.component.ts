@@ -22,6 +22,7 @@ export class DashboardAuditorComponent implements OnInit {
       console.log(data)
       this.empleados = data;
     });
+    this.goInformes();
   }
 
   //Se direcciona para crear un nuevo empleado

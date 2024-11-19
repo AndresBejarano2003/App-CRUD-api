@@ -33,24 +33,25 @@ export class LoginComponent implements OnInit {
     this.api.getValidarUsuario(form.username, form.password).subscribe({
       next: (data) => {
         console.log('Usuario válido:', data);
-        // Aquí puedes manejar la respuesta exitosa, por ejemplo, redirigir al usuario
-        this.api.getUnaEmpresa(data.idEmpres).subscribe(dataEmpresa => {
-          if (dataEmpresa.licencia == "ACTIVA") {
-            switch (data.tipouser) {
-              case "ADMIN":
-                this.router.navigate(['dashboard'])
-                break;
-              case "AUDITOR":
-                this.router.navigate(['dashboardAuditor', data.cedulaxx])
-                break;
-              case "EMPRESA":
+
+        switch (data.tipouser) {
+          case "ADMIN":
+            this.router.navigate(['dashboard'])
+            break;
+          case "AUDITOR":
+            this.router.navigate(['dashboardAuditor', data.cedulaxx])
+            break;
+          case "EMPRESA":
+            // Aquí puedes manejar la respuesta exitosa, por ejemplo, redirigir al usuario
+            this.api.getUnaEmpresa(data.idEmpres).subscribe(dataEmpresa => {
+              if (dataEmpresa.licencia == "ACTIVA") {
                 this.router.navigate(['dashboardEmpresa', data.cedulaxx, data.idEmpres])
-                break;
-            }
-          } else {
-            alert("Su licencia se encuentra inactiva, por favor comunicarse con su auditor.")
-          }
-        })
+              } else {
+                alert("Su licencia se encuentra inactiva, por favor comunicarse con su auditor.")
+              }
+            })
+            break;
+        }
       },
       error: (err) => {
         console.error('Error:', err.error);

@@ -35,6 +35,11 @@ export class ApiService {
     console.log(direccion);
     return this.http.get<ListaEmpleadosI[]>(direccion);
   }
+  getEmployees2(): Observable<Usuario[]> {
+    let direccion = this.url + 'ListadoUsuario';
+    console.log(direccion);
+    return this.http.get<Usuario[]>(direccion);
+  }
   getInformes(): Observable<ListaInformesI[]> {
     return this.http.get<ListaInformesI[]>(
       `${ControllerApiList.Auditor.ListarInformes}`);

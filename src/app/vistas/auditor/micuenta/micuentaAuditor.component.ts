@@ -49,6 +49,7 @@ export class MiCuentaAuditorComponent implements OnInit {
       fechmodi: new Date(),
       horamodi: "",
       idEmpres: "",
+      idAuditor: "",
     }
   );
 
@@ -180,6 +181,8 @@ export class MiCuentaAuditorComponent implements OnInit {
     console.log(mFechmodi[2] + "-" + mFechmodi[1] + "-" + mFechmodi[0]);
 
     form.fechmodi = mFechmodi[2] + "-" + mFechmodi[1] + "-" + mFechmodi[0];
+    form.idEmpres = "";
+    form.idAuditor = "";
 
 
     this.api.putUsuarioEmpresa(form, form.cedulaxx).subscribe(data => {

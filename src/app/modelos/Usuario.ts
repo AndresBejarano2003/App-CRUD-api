@@ -22,4 +22,5 @@ export interface Usuario{
     fechmodi: any,
     horamodi: string;
     idEmpres: string;
+    idAuditor: string;
 }

@@ -20,6 +20,7 @@ export class DashboardEmpresaAuditorComponent implements OnInit {
   nitEmpresa!: string | null;
   nombreEmpresa!: string | null;
   dateFinish!: string | undefined;
+  auditor!: string | undefined;
 
   requisitos: any[] = []; // Aquí irían los datos reales
   cumplimientoRequisitos: number = 0;
@@ -97,6 +98,11 @@ export class DashboardEmpresaAuditorComponent implements OnInit {
         this.dateFinish = "2024-11-17"; // Valor por defecto en caso de error
       }
     })
+
+    
+    this.api.getDataUser(this.cedulaxx).subscribe(dataEmpre => {
+        this.auditor = dataEmpre.nombresx;
+    }, rest => {})
   }
 
   updateProgressBar(section: string): void {

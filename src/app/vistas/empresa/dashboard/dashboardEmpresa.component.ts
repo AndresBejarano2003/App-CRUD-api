@@ -18,6 +18,7 @@ export class DashboardEmpresaComponent implements OnInit {
   nitEmpresa!: string | null;
   nombreEmpresa!: string | null;
   dateFinish!: string | undefined;
+  auditor!: string | undefined;
 
   informes: any[] = []; // Aquí guardaremos los datos de informes
 
@@ -39,6 +40,7 @@ export class DashboardEmpresaComponent implements OnInit {
         mFechasInformes.push(element.fechamax);
         mEstadoInformes.push(element.regestxx);
       });
+      
 
       this.renderCharts(mEstadoInformes);
       let fechaAsignacion = this.getMaxDate(mFechasInformes)?.toLocaleString() || "2024-11-17";
@@ -60,6 +62,12 @@ export class DashboardEmpresaComponent implements OnInit {
       console.log(this.informes);
 
     })
+
+    this.api.getDataUser(this.cedulaxx).subscribe(dataEmpre => {
+      this.api.getDataUser(dataEmpre.idAuditor).subscribe(dataAudit => {
+        this.auditor = dataAudit.nombresx;
+      }, rest => {})
+    }, rest => {})
   }
 
   

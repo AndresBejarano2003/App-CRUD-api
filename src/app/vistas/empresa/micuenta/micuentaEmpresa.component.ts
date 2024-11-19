@@ -55,6 +55,7 @@ export class MiCuentaEmpresaComponent implements OnInit {
       fechmodi: new Date(),
       horamodi: "",
       idEmpres: "",
+      idAuditor: "",
     }
   );
 
@@ -186,7 +187,7 @@ export class MiCuentaEmpresaComponent implements OnInit {
     console.log(mFechmodi[2] + "-" + mFechmodi[1] + "-" + mFechmodi[0]);
 
     form.fechmodi = mFechmodi[2] + "-" + mFechmodi[1] + "-" + mFechmodi[0];
-
+    form.idEmpres = this.nitEmpresa;
 
     this.api.putUsuarioEmpresa(form, form.cedulaxx).subscribe(data => {
       console.log("Actualizar empresa:")
